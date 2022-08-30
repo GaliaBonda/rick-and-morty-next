@@ -11,7 +11,7 @@ const Nav: FC<Props> = ({ links }) => {
       {links.map((item, index) => {
         return (
           <StyledLink href={item.link} key={index}>
-            {item.title}
+            <a>{item.title}</a>
           </StyledLink>
         );
       })}

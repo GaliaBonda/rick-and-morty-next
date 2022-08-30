@@ -17,6 +17,7 @@ import ICharacterApi from '../common/interfaces/ICharacterApi';
 import { sagaActions } from './store/sagas';
 import { RootState } from './store/store';
 import isElementInViewport from '../common/utils/isElementInViewport';
+import { GlobalStyle } from '../styles/Global.styles';
 
 const Main: FC = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -68,26 +69,30 @@ const Main: FC = () => {
   }, [characters.length]);
 
   return (
-    <MainDiv>
-      <Nav links={links} />
-      <StyledHeading>Rick and Morty characters</StyledHeading>
-      <StyledList>
-        {characters.map((item) => {
-          return (
-            <Character
-              key={item.id}
-              name={item.name}
-              id={item.id}
-              image={item.image}
-              clickHandler={goToCharacter}
-            />
-          );
-        })}
-      </StyledList>
-      <StyledDiv ref={bottomRef} data-testid='test-scroll-load'>
-        {loaderShown && <Loader />}
-      </StyledDiv>
-    </MainDiv>
+    <>
+      <GlobalStyle />
+
+      <MainDiv>
+        <Nav links={links} />
+        <StyledHeading>Rick and Morty characters</StyledHeading>
+        <StyledList>
+          {characters.map((item) => {
+            return (
+              <Character
+                key={item.id}
+                name={item.name}
+                id={item.id}
+                image={item.image}
+                clickHandler={goToCharacter}
+              />
+            );
+          })}
+        </StyledList>
+        <StyledDiv ref={bottomRef} data-testid='test-scroll-load'>
+          {loaderShown && <Loader />}
+        </StyledDiv>
+      </MainDiv>
+    </>
   );
 };
 

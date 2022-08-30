@@ -7,7 +7,7 @@ export const StyledNav = styled.nav`
   justify-content: center;
   margin-bottom: 4em;
 `;
-export const StyledLink = styled(Link)`
+export const StyledLink = styled.a`
   display: block;
   color: white;
   font-size: 1.5em;

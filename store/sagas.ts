@@ -1,14 +1,14 @@
 import { AnyAction } from '@reduxjs/toolkit';
 import { put, call, all, takeLatest, delay } from 'redux-saga/effects';
-import api from '../../api/api';
-import ICharacterApi from '../../common/interfaces/ICharacterApi';
-import IResponse from '../../common/interfaces/IResponse';
-import { update, add } from '../../features/characters/charactersSlice';
-import { updateCharacter } from '../../features/character/characterSlice';
-import { getNextPage } from '../../features/next-page/nextPageSlice';
-import ILocation from '../../common/interfaces/ILocation';
-import { updateLocations } from '../../features/locations/locationsSlice';
-import { getAll } from '../../features/all-characters/allCharactersSlice';
+import api from '../api/api';
+import ICharacterApi from '../common/interfaces/ICharacterApi';
+import IResponse from '../common/interfaces/IResponse';
+import { update, add } from '../features/characters/charactersSlice';
+import { updateCharacter } from '../features/character/characterSlice';
+import { getNextPage } from '../features/next-page/nextPageSlice';
+import ILocation from '../common/interfaces/ILocation';
+import { updateLocations } from '../features/locations/locationsSlice';
+import { getAll } from '../features/all-characters/allCharactersSlice';
 
 export const sagaActions = {
   UPDATE_CHARACTERS_SAGA: 'UPDATE_CHARACTERS_SAGA',

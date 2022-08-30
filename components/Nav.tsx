@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { FC } from 'react';
 import { StyledLink, StyledNav } from '../styles/Nav.styles';
 
@@ -10,9 +11,9 @@ const Nav: FC<Props> = ({ links }) => {
     <StyledNav>
       {links.map((item, index) => {
         return (
-          <StyledLink href={item.link} key={index}>
-            <a>{item.title}</a>
-          </StyledLink>
+          <Link href={item.link} key={index}>
+            <StyledLink>{item.title}</StyledLink>
+          </Link>
         );
       })}
     </StyledNav>

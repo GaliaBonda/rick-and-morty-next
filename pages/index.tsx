@@ -12,12 +12,11 @@ import {
 import Character from '../components/Character';
 import Loader from '../components/Loader';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import ICharacterApi from '../common/interfaces/ICharacterApi';
-import { sagaActions } from './store/sagas';
-import { RootState } from './store/store';
+import { sagaActions } from '../store/sagas';
+import { RootState } from '../store/store';
 import isElementInViewport from '../common/utils/isElementInViewport';
-import { GlobalStyle } from '../styles/Global.styles';
+import { useRouter } from 'next/router';
 
 const Main: FC = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -36,7 +35,10 @@ const Main: FC = () => {
     { link: 'statistics/locations', title: 'Locations' },
   ];
 
+  const router = useRouter();
+
   const goToCharacter = (id: number) => {
+    router.push('characters/' + id.toString());
     // history('characters/' + id);
   };
 
@@ -69,30 +71,26 @@ const Main: FC = () => {
   }, [characters.length]);
 
   return (
-    <>
-      <GlobalStyle />
-
-      <MainDiv>
-        <Nav links={links} />
-        <StyledHeading>Rick and Morty characters</StyledHeading>
-        <StyledList>
-          {characters.map((item) => {
-            return (
-              <Character
-                key={item.id}
-                name={item.name}
-                id={item.id}
-                image={item.image}
-                clickHandler={goToCharacter}
-              />
-            );
-          })}
-        </StyledList>
-        <StyledDiv ref={bottomRef} data-testid='test-scroll-load'>
-          {loaderShown && <Loader />}
-        </StyledDiv>
-      </MainDiv>
-    </>
+    <MainDiv>
+      <Nav links={links} />
+      <StyledHeading>Rick and Morty characters</StyledHeading>
+      <StyledList>
+        {characters.map((item) => {
+          return (
+            <Character
+              key={item.id}
+              name={item.name}
+              id={item.id}
+              image={item.image}
+              clickHandler={goToCharacter}
+            />
+          );
+        })}
+      </StyledList>
+      <StyledDiv ref={bottomRef} data-testid='test-scroll-load'>
+        {loaderShown && <Loader />}
+      </StyledDiv>
+    </MainDiv>
   );
 };
 

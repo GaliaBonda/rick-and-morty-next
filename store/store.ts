@@ -1,13 +1,13 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import charactersReducer from '../../features/characters/charactersSlice';
-import characterReducer from '../../features/character/characterSlice';
-import allCharactersReducer from '../../features/all-characters/allCharactersSlice';
-import locationsReducer from '../../features/locations/locationsSlice';
-import nextPageReducer from '../../features/next-page/nextPageSlice';
+import charactersReducer from '../features/characters/charactersSlice';
+import characterReducer from '../features/character/characterSlice';
+import allCharactersReducer from '../features/all-characters/allCharactersSlice';
+import locationsReducer from '../features/locations/locationsSlice';
+import nextPageReducer from '../features/next-page/nextPageSlice';
 import saga from './sagas';
 
-const sagaMiddleware = createSagaMiddleware();
+let sagaMiddleware = createSagaMiddleware();
 const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];
 
 export const store = configureStore({

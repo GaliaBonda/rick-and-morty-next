@@ -56,7 +56,7 @@ function* getAllCharacters() {
   try {
     let allCharacters: ICharacterApi[] = [];
     const data: IResponse<ICharacterApi>[] = yield call(() =>
-      Promise.all(promises).then((result) => result)
+      Promise.all(promises)
     );
 
     data.forEach((item) => {

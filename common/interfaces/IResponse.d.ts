@@ -1,3 +1,5 @@
+import { AxiosResponse } from 'axios';
+
 export default interface IResponse<Data> {
   info: {
     count: number;

@@ -78,6 +78,7 @@ function* addCharacters(action: AnyAction) {
     const data: IResponse<ICharacterApi> = yield call(() =>
       api.get(action.payload)
     );
+
     yield put(getNextPage(data.info.next));
     yield put(add(data.results));
   } catch (error) {

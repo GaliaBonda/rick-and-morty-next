@@ -1,4 +1,3 @@
-import type { NextPage } from 'next';
 import { FC, useEffect, useRef, useState } from 'react';
 import Nav from '../components/Nav';
 import React from 'react';
@@ -17,17 +16,41 @@ import { sagaActions } from '../store/sagas';
 import { RootState } from '../store/store';
 import isElementInViewport from '../common/utils/isElementInViewport';
 import { useRouter } from 'next/router';
+import api from '../api/api';
+import IResponse from '../common/interfaces/IResponse';
+import { getNextPage } from '../features/next-page/nextPageSlice';
+import { update } from '../features/characters/charactersSlice';
 
-const Main: FC = () => {
+interface Props {
+  characters: ICharacterApi[];
+  nextPage: string;
+}
+
+export const getStaticProps = async () => {
+  let characters: ICharacterApi[] = [];
+  let nextPage = '';
+  try {
+    const data: IResponse<ICharacterApi> = await api.get('/character');
+    characters = data.results;
+    nextPage = data.info.next;
+  } catch (error) {
+    console.log(error);
+  }
+  return { props: { characters, nextPage } };
+};
+
+const Main: FC<Props> = ({ characters, nextPage }) => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const [bottomHit, setBottomHit] = useState(false);
   const [loaderShown, setLoaderShown] = useState(false);
 
-  const characters: ICharacterApi[] = useSelector(
+  const stateCharacters: ICharacterApi[] = useSelector(
     (state: RootState) => state.characters
   );
-  const nextPage = useSelector((state: RootState) => state.nextPage);
+
+  const stateNextPage = useSelector((state: RootState) => state.nextPage);
+  // const [nextPage, setNextPage] = useState(1);
 
   const links = [
     { link: 'statistics', title: 'Statistics' },
@@ -42,8 +65,10 @@ const Main: FC = () => {
   };
 
   useEffect(() => {
-    if (!characters.length)
-      dispatch({ type: sagaActions.UPDATE_CHARACTERS_SAGA });
+    if (!stateCharacters.length) {
+      dispatch(update(characters));
+      dispatch(getNextPage(nextPage));
+    }
   }, []);
 
   useEffect(() => {
@@ -55,7 +80,7 @@ const Main: FC = () => {
         setBottomHit(false);
         dispatch({
           type: sagaActions.ADD_CHARACTERS_SAGA,
-          payload: nextPage,
+          payload: stateNextPage,
         });
       }
     };
@@ -63,7 +88,7 @@ const Main: FC = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [nextPage, bottomHit]);
+  }, [stateNextPage, bottomHit]);
 
   useEffect(() => {
     setLoaderShown(false);
@@ -74,7 +99,7 @@ const Main: FC = () => {
       <Nav links={links} />
       <StyledHeading>Rick and Morty characters</StyledHeading>
       <StyledList>
-        {characters.map((item) => {
+        {stateCharacters.map((item) => {
           return (
             <Character
               key={item.id}

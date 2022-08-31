@@ -12,6 +12,7 @@ interface Props {
   image: string;
   hiddenImage: boolean;
   activeTab: boolean;
+  clickHandler: () => void;
 }
 
 const LinkView: FC<Props> = ({
@@ -20,10 +21,15 @@ const LinkView: FC<Props> = ({
   image,
   hiddenImage,
   activeTab,
+  clickHandler,
 }) => {
   return (
     <Link href={link}>
-      <StyledLink $active={activeTab} data-testid='test-link'>
+      <StyledLink
+        $active={activeTab}
+        data-testid='test-link'
+        onClick={clickHandler}
+      >
         <StyledHeading>{title}</StyledHeading>
         {!hiddenImage && <StyledImage src={image} />}
       </StyledLink>

@@ -13,26 +13,32 @@ const StatisticsLayout: FC<Props> = ({ children, imagesHidden }) => {
   const links = [{ link: '/', title: '← Back to Main' }];
   const router = useRouter();
 
-  const pathname = router.pathname as string;
+  const query = router.query.type;
 
+  const clickHandler = (tab: string) => {
+    if (query === tab) {
+      router.push('/statistics');
+    }
+  };
   return (
     <>
       <Nav links={links} />
       <StyledDiv data-testid='test-statistics'>
         <LinkView
           link={
-            pathname.includes('episodes')
+            query === 'episodes'
               ? { pathname: '/statistics' }
               : { pathname: '/statistics/episodes' }
           }
           title='Episodes'
           image='/rm-episodes.webp'
           hiddenImage={imagesHidden}
-          activeTab={pathname.includes('episodes')}
+          activeTab={query === 'episodes'}
+          clickHandler={() => clickHandler('episodes')}
         />
         <LinkView
           link={
-            pathname.includes('locations')
+            query === 'locations'
               ? { pathname: '/statistics' }
               : {
                   pathname: '/statistics/locations',
@@ -41,7 +47,8 @@ const StatisticsLayout: FC<Props> = ({ children, imagesHidden }) => {
           title='Locations'
           image='/rm-locations.webp'
           hiddenImage={imagesHidden}
-          activeTab={pathname.includes('locations')}
+          activeTab={query === 'locations'}
+          clickHandler={() => clickHandler('locations')}
         />
       </StyledDiv>
       {children}

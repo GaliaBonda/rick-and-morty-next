@@ -1,5 +1,4 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { FC } from 'react';
 import ITableData from '../common/interfaces/ITableData';
 import { StyledTableCell, StyledTableRow } from '../styles/Table.styles';
 
@@ -7,7 +6,7 @@ interface Props {
   row: ITableData;
 }
 
-function TableRow({ row }: Props) {
+const TableRow: FC<Props> = ({ row }) => {
   return (
     <StyledTableRow>
       {row.data.map((item, index) => {
@@ -19,6 +18,6 @@ function TableRow({ row }: Props) {
       })}
     </StyledTableRow>
   );
-}
+};
 
 export default TableRow;

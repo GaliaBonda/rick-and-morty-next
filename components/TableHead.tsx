@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import {
   StyledTableHead,
   StyledHeadRow,
@@ -11,7 +11,7 @@ interface Props {
   changeSort: (desc: boolean, column: number) => void;
 }
 
-function TableHead({ header, changeSort }: Props) {
+const TableHead: FC<Props> = ({ header, changeSort }) => {
   const [descSorted, setDescSorted] = useState(true);
   const [activeSort, setActiveSort] = useState(1);
   const handleClick = (index: number) => {
@@ -46,6 +46,6 @@ function TableHead({ header, changeSort }: Props) {
       </StyledHeadRow>
     </StyledTableHead>
   );
-}
+};
 
 export default TableHead;

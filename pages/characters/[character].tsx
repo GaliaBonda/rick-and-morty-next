@@ -3,6 +3,7 @@ import Nav from '../../components/Nav';
 import CharacterView from '../../components/CharacterView';
 import ICharacterApi from '../../common/interfaces/ICharacterApi';
 import api from '../../api/api';
+import getAllData from '../../common/utils/getAllData';
 
 interface Paths {
   params: {
@@ -15,17 +16,7 @@ interface Props {
 }
 
 export const getStaticPaths = async () => {
-  const charactersIds: number[] = [];
-  for (let i = 1; i < 827; i++) {
-    charactersIds.push(i);
-  }
-  let allCharacters: ICharacterApi[] = [];
-  try {
-    allCharacters = await api.get('/character/' + charactersIds.toString());
-  } catch (error) {
-    console.log(error);
-  }
-
+  const allCharacters = await getAllData('/character');
   const paths = allCharacters.map((character) => ({
     params: { character: `${character.id}` },
   }));

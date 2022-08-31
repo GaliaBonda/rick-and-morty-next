@@ -7,7 +7,7 @@ import {
 } from '../styles/LinkView.styles';
 
 interface Props {
-  link: string;
+  link: { pathname: string; query: { slug: string } };
   title: string;
   image: string;
   hiddenImage: boolean;

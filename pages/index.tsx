@@ -39,7 +39,6 @@ const Main: FC = () => {
 
   const goToCharacter = (id: number) => {
     router.push('characters/' + id.toString());
-    // history('characters/' + id);
   };
 
   useEffect(() => {

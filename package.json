@@ -10,11 +10,13 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@redux-devtools/extension": "^3.2.3",
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",
     "babel-preset-next": "^1.4.0",
     "framer-motion": "^7.2.1",
     "next": "12.2.5",
+    "next-redux-wrapper": "^7.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.2",

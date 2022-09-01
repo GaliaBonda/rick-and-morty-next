@@ -1,16 +1,22 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { Provider } from 'react-redux';
-import { store } from '../store/store';
+import { wrapper } from '../store/store';
 import { GlobalStyle } from '../styles/Global.styles';
+import { FC } from 'react';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <Provider store={store}>
-      <GlobalStyle />
-      <Component {...pageProps} />
-    </Provider>
-  );
-}
+const WrappedApp: FC<AppProps> = ({ Component, pageProps }) => (
+  <>
+    <GlobalStyle />
+    <Component {...pageProps} />
+  </>
+);
+// function MyApp({ Component, pageProps }: AppProps) {
+//   return (
+//     <>
+//       <GlobalStyle />
+//       <Component {...pageProps} />
+//     </>
+//   );
+// }
 
-export default MyApp;
+export default wrapper.withRedux(WrappedApp);

@@ -13,34 +13,50 @@ import Loader from '../components/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import ICharacterApi from '../common/interfaces/ICharacterApi';
 import { sagaActions } from '../store/sagas';
-import { RootState } from '../store/store';
+import { RootState, wrapper } from '../store/store';
 import isElementInViewport from '../common/utils/isElementInViewport';
 import { useRouter } from 'next/router';
 import api from '../api/api';
 import IResponse from '../common/interfaces/IResponse';
 import { getNextPage } from '../features/next-page/nextPageSlice';
 import { update } from '../features/characters/charactersSlice';
-import { GetServerSideProps } from 'next';
 
 interface Props {
   characters: ICharacterApi[];
   nextPage: string;
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  let characters: ICharacterApi[] = [];
-  let nextPage = '';
-  try {
-    const data: IResponse<ICharacterApi> = await api.get('/character');
-    characters = data.results;
-    nextPage = data.info.next;
-  } catch (error) {
-    console.log(error);
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async () => {
+    let characters: ICharacterApi[] = [];
+    let nextPage = '';
+    try {
+      const data: IResponse<ICharacterApi> = await api.get('/character');
+      characters = data.results;
+      nextPage = data.info.next;
+      store.dispatch(update(characters));
+      store.dispatch(getNextPage(nextPage));
+    } catch (error) {
+      console.log(error);
+    }
+    return { props: { characters, nextPage } };
   }
-  return { props: { characters, nextPage } };
-};
+);
 
-const Main: FC<Props> = ({ characters, nextPage }) => {
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   let characters: ICharacterApi[] = [];
+//   let nextPage = '';
+//   try {
+//     const data: IResponse<ICharacterApi> = await api.get('/character');
+//     characters = data.results;
+//     nextPage = data.info.next;
+//   } catch (error) {
+//     console.log(error);
+//   }
+//   return { props: { characters, nextPage } };
+// };
+
+const Main: FC<Props> = () => {
   const links = [
     { link: 'statistics', title: 'Statistics' },
     { link: 'statistics/episodes', title: 'Episodes' },
@@ -55,6 +71,7 @@ const Main: FC<Props> = ({ characters, nextPage }) => {
   const storeCharacters: ICharacterApi[] = useSelector(
     (state: RootState) => state.characters
   );
+
   const storeNextPage = useSelector((state: RootState) => state.nextPage);
   const router = useRouter();
 
@@ -62,12 +79,12 @@ const Main: FC<Props> = ({ characters, nextPage }) => {
     router.push('characters/' + id.toString());
   };
 
-  useEffect(() => {
-    if (!storeCharacters.length) {
-      dispatch(update(characters));
-      dispatch(getNextPage(nextPage));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!storeCharacters.length) {
+  //     dispatch(update(characters));
+  //     dispatch(getNextPage(nextPage));
+  //   }
+  // }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,7 +107,7 @@ const Main: FC<Props> = ({ characters, nextPage }) => {
 
   useEffect(() => {
     setLoaderShown(false);
-  }, [characters.length]);
+  }, [storeCharacters.length]);
 
   return (
     <MainDiv>

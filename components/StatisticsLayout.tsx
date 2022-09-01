@@ -12,7 +12,6 @@ interface Props {
 const StatisticsLayout: FC<Props> = ({ children, imagesHidden }) => {
   const links = [{ link: '/', title: '← Back to Main' }];
   const router = useRouter();
-
   const query = router.query.type;
 
   const clickHandler = (tab: string) => {
@@ -20,6 +19,7 @@ const StatisticsLayout: FC<Props> = ({ children, imagesHidden }) => {
       router.push('/statistics');
     }
   };
+
   return (
     <>
       <Nav links={links} />

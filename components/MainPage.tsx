@@ -1,7 +1,6 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import Nav from './Nav';
 import React from 'react';
-
 import {
   MainDiv,
   StyledDiv,
@@ -32,7 +31,6 @@ const MainPage: FC = () => {
   const storeCharacters: ICharacterApi[] = useSelector(
     (state: RootState) => state.characters
   );
-
   const storeNextPage = useSelector((state: RootState) => state.nextPage);
   const router = useRouter();
 

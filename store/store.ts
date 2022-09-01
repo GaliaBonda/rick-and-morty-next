@@ -8,9 +8,6 @@ import {
 import { applyMiddleware } from 'redux';
 import createSagaMiddleware, { Task } from 'redux-saga';
 import charactersReducer from '../features/characters/charactersSlice';
-import characterReducer from '../features/character/characterSlice';
-import allCharactersReducer from '../features/all-characters/allCharactersSlice';
-import locationsReducer from '../features/locations/locationsSlice';
 import nextPageReducer from '../features/next-page/nextPageSlice';
 import saga from './sagas';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
@@ -19,9 +16,6 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 const combinedReducer = combineReducers({
   characters: charactersReducer,
   nextPage: nextPageReducer,
-  allCharacters: allCharactersReducer,
-  character: characterReducer,
-  locations: locationsReducer,
 });
 
 const reducer: Reducer = (state: RootState, action: AnyAction) => {

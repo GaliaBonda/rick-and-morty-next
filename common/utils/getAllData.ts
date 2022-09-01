@@ -1,4 +1,3 @@
-import { AxiosResponse } from 'axios';
 import api from '../../api/api';
 import ICharacterApi from '../interfaces/ICharacterApi';
 import ILocation from '../interfaces/ILocation';
@@ -21,6 +20,8 @@ const getAllData = async (path: string) => {
   } catch (error) {
     console.log(error);
   }
+
+  // *** Alternate way of getting all data from API (locations, episodes)
 
   //   const ids: number[] = [];
   //   try {

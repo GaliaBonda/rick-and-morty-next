@@ -36,4 +36,15 @@ export const GlobalStyle = createGlobalStyle`
   text-decoration: none;
   cursor: pointer;
   }
+  button {
+    background-color: transparent;
+    cursor: pointer;
+    box-shadow: none;
+    outline: none;
+    border: none;
+  }
+  button:focus {
+    box-shadow: none;
+    outline: none;
+  }
 `;

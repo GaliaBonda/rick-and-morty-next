@@ -8,6 +8,7 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
+  swcMinify: false,
 };
 
 module.exports = nextConfig;

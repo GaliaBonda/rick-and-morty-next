@@ -11,7 +11,7 @@ const Nav: FC<Props> = ({ links }) => {
   const router = useRouter();
   return (
     <StyledNav>
-      {router.asPath !== '/' && (
+      {router?.asPath !== '/' && (
         <StyledBackBtn onClick={() => router.back()}>
           <svg
             version='1.1'
@@ -35,7 +35,7 @@ const Nav: FC<Props> = ({ links }) => {
       {links.map((item, index) => {
         return (
           <Link href={item.link} key={index}>
-            <StyledLink>{item.title}</StyledLink>
+            <StyledLink data-testid='test-link'>{item.title}</StyledLink>
           </Link>
         );
       })}

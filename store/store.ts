@@ -16,22 +16,6 @@ import saga from './sagas';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import { composeWithDevTools } from '@redux-devtools/extension';
 
-// let sagaMiddleware = createSagaMiddleware();
-// const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];
-
-// const store = configureStore({
-//   reducer: {
-//     characters: charactersReducer,
-//     nextPage: nextPageReducer,
-//     allCharacters: allCharactersReducer,
-//     character: characterReducer,
-//     locations: locationsReducer,
-//   },
-//   middleware,
-// });
-
-// sagaMiddleware.run(saga);
-
 const combinedReducer = combineReducers({
   characters: charactersReducer,
   nextPage: nextPageReducer,
@@ -43,22 +27,14 @@ const combinedReducer = combineReducers({
 const reducer: Reducer = (state: RootState, action: AnyAction) => {
   if (action.type === HYDRATE && !state.characters.length) {
     const nextState = {
-      ...state, // use previous state
-      ...action.payload, // apply delta from hydration
+      ...state,
+      ...action.payload,
     };
     return nextState;
   } else {
     return combinedReducer(state, action);
   }
 };
-
-// export const makeStore = () => {
-//   const store = configureStore({
-//     reducer,
-//     middleware,
-//   });
-//   return store;
-// };
 
 export interface SagaStore extends Store {
   sagaTask?: Task;
@@ -75,9 +51,6 @@ export const makeStore = () => {
 };
 
 export const wrapper = createWrapper<Store<RootState>>(makeStore);
-// export const wrapper = createWrapper<Store<RootState>>(makeStore, {
-//   debug: true,
-// });
 
 export type RootState = ReturnType<Store['getState']>;
 export type AppDispatch = Store['dispatch'];

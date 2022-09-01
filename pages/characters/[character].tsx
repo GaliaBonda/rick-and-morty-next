@@ -6,12 +6,6 @@ import api from '../../api/api';
 import getAllData from '../../common/utils/getAllData';
 import { wrapper } from '../../store/store';
 
-// interface Paths {
-//   params: {
-//     character: string;
-//   };
-// }
-
 interface Props {
   character: ICharacterApi;
 }
@@ -24,17 +18,10 @@ export const getStaticPaths = async () => {
   return { paths, fallback: false };
 };
 
-// export const getStaticProps = async ({ params }: Paths) => {
-//   const character = await api.get(`/character/${params.character}`);
-//   return { props: { character } };
-// };
-
-export const getStaticProps = wrapper.getStaticProps(
-  (store) => async (context) => {
-    const character = await api.get(`/character/${context.params?.character}`);
-    return { props: { character } };
-  }
-);
+export const getStaticProps = wrapper.getStaticProps(() => async (context) => {
+  const character = await api.get(`/character/${context.params?.character}`);
+  return { props: { character } };
+});
 
 const Character: FC<Props> = ({ character }) => {
   const { name, status, species, gender, image, id } = character;

@@ -1,17 +1,11 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import getAllData from '../../common/utils/getAllData';
-import StatisticsLayout from '../../components/StatisticsLayout';
-import Table from '../../components/Table';
+import StatisticTablePage from '../../components/StatisticTablePage';
+import { wrapper } from '../../store/store';
 
 interface Props {
   rows: { id: number; data: (string | number)[] }[];
   heading: string[];
-}
-
-interface Paths {
-  params: {
-    type: string;
-  };
 }
 
 export const getStaticPaths = async () => {
@@ -24,8 +18,8 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params }: Paths) => {
-  const path = params.type === 'episodes' ? '/character' : '/location';
+export const getStaticProps = wrapper.getStaticProps(() => async (context) => {
+  const path = context.params?.type === 'episodes' ? '/character' : '/location';
   const allData = await getAllData(path);
 
   const rows = allData
@@ -34,7 +28,7 @@ export const getStaticProps = async ({ params }: Paths) => {
         id: item.id,
         data: [
           item.name,
-          params.type === 'episodes'
+          context.params?.type === 'episodes'
             ? item.episode?.length || 0
             : item.residents?.length || 0,
         ],
@@ -45,39 +39,15 @@ export const getStaticProps = async ({ params }: Paths) => {
     });
 
   const heading =
-    params.type === 'episodes'
+    context.params?.type === 'episodes'
       ? ['Character name', 'Number of episodes']
       : ['Location', 'Number of characters'];
 
   return { props: { rows, heading } };
-};
+});
 
 const StatisticTable: FC<Props> = ({ rows, heading }) => {
-  const [sortedRows, setSortedRows] = useState(rows);
-
-  const changeSort = (desc: boolean, column: number) => {
-    setSortedRows((startRows) => {
-      if (desc) {
-        return [...startRows].sort((a, b) =>
-          a.data[column] >= b.data[column] ? 1 : -1
-        );
-      } else {
-        return [...startRows].sort((a, b) =>
-          a.data[column] <= b.data[column] ? 1 : -1
-        );
-      }
-    });
-  };
-
-  useEffect(() => {
-    setSortedRows(rows);
-  }, [rows]);
-
-  return (
-    <StatisticsLayout imagesHidden={true}>
-      <Table header={heading} rows={sortedRows} changeSort={changeSort} />
-    </StatisticsLayout>
-  );
+  return <StatisticTablePage rows={rows} heading={heading} />;
 };
 
 export default StatisticTable;

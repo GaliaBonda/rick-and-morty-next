@@ -17,7 +17,6 @@ import { RootState } from '../../store/store';
 import createSagaMiddleware from 'redux-saga';
 import saga, { sagaActions } from '../../store/sagas';
 import { HYDRATE } from 'next-redux-wrapper';
-import { RouterContext } from 'next/dist/shared/lib/router-context';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
@@ -43,22 +42,24 @@ const reducer: Reducer = (state: RootState, action: AnyAction) => {
   }
 };
 
+export const testStore = configureStore({
+  reducer,
+  preloadedState: {},
+  middleware,
+});
+sagaMiddleware.run(saga);
 export function renderWithProviders(
   ui: React.ReactElement,
   {
     preloadedState = {},
-    store = configureStore({
-      reducer,
-      preloadedState,
-      middleware,
-    }),
+    store = testStore,
     ...renderOptions
   }: ExtendedRenderOptions = {}
 ) {
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
     return <Provider store={store}>{children}</Provider>;
   }
-  sagaMiddleware.run(saga);
+
   store.dispatch({ type: sagaActions.UPDATE_CHARACTERS_SAGA });
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
 }

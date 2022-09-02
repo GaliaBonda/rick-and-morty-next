@@ -15,8 +15,9 @@ import { render } from '@testing-library/react';
 import { RenderOptions } from '@testing-library/react';
 import { RootState } from '../../store/store';
 import createSagaMiddleware from 'redux-saga';
-import saga from '../../store/sagas';
+import saga, { sagaActions } from '../../store/sagas';
 import { HYDRATE } from 'next-redux-wrapper';
+import { RouterContext } from 'next/dist/shared/lib/router-context';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
@@ -46,7 +47,6 @@ export function renderWithProviders(
   ui: React.ReactElement,
   {
     preloadedState = {},
-    // Automatically create a store instance if no store was passed in
     store = configureStore({
       reducer,
       preloadedState,
@@ -59,8 +59,6 @@ export function renderWithProviders(
     return <Provider store={store}>{children}</Provider>;
   }
   sagaMiddleware.run(saga);
-  // console.log(store.getState());
-
-  // Return an object with the store and all of RTL's query functions
+  store.dispatch({ type: sagaActions.UPDATE_CHARACTERS_SAGA });
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
 }

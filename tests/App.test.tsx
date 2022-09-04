@@ -1,8 +1,7 @@
+import React from 'react';
 import {
-  act,
   cleanup,
   fireEvent,
-  render,
   renderHook,
   screen,
   waitFor,
@@ -10,18 +9,11 @@ import {
 import '@testing-library/jest-dom';
 import { renderWithProviders } from '../common/utils/renderWithProviders';
 import Main from '../pages';
-import React, { ReactElement } from 'react';
 import Character from '../components/Character';
 import userEvent from '@testing-library/user-event';
 import singletonRouter, { NextRouter } from 'next/router';
 import mockRouter, { useRouter } from 'next-router-mock';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
-import { withRouter } from 'next/router';
-import Nav from '../components/Nav';
-import { StyledLink } from '../styles/LinkView.styles';
-import NextLink from 'next/link';
-import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider';
-import Link from 'next/link';
 import CharacterPage from '../pages/characters/[character]';
 import StatisticTable from '../pages/statistics/[type]';
 import Statistics from '../pages/statistics';
@@ -179,7 +171,7 @@ test('sorting', async () => {
       heading={['Character name', 'Number of episodes']}
     />
   );
-  let sorter = await screen.findAllByTestId('test-sorter');
+  const sorter = await screen.findAllByTestId('test-sorter');
   let tableCells = await screen.findAllByTestId('test-table-cell');
   userEvent.click(sorter[0]);
   await waitFor(() => {

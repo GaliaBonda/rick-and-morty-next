@@ -13,7 +13,6 @@ export default {
     url: { table: { disable: true } },
     created: { table: { disable: true } },
   },
-  decorators: [(Story) => <Story />],
 } as ComponentMeta<typeof CharacterView>;
 const Template: ComponentStory<typeof CharacterView> = (args) => (
   <CharacterView {...args} />

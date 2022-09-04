@@ -23,20 +23,20 @@ const getAllData = async (path: string) => {
 
   // *** Alternate way of getting all data from API (locations, episodes)
 
-  //   const ids: number[] = [];
-  //   try {
-  //     const data: IResponse<ILocation & ICharacterApi> = await api.get(path);
-  //     allData = [...data.results];
-  //     for (let i = data.results.length + 1; i <= data.info.count; i++) {
-  //       ids.push(i);
-  //     }
-  //     const otherData: (ILocation & ICharacterApi)[] = await api.get(
-  //       `${path}/${ids.toString()}`
-  //     );
-  //     allData = [...allData, ...otherData];
-  //   } catch (error) {
-  //     console.log(error);
+  // const ids: number[] = [];
+  // try {
+  //   const data: IResponse<ILocation & ICharacterApi> = await api.get(path);
+  //   allData = [...data.results];
+  //   for (let i = data.results.length + 1; i <= data.info.count; i++) {
+  //     ids.push(i);
   //   }
+  //   const otherData: (ILocation & ICharacterApi)[] = await api.get(
+  //     `${path}/${ids.toString()}`
+  //   );
+  //   allData = [...allData, ...otherData];
+  // } catch (error) {
+  //   console.log(error);
+  // }
 
   return allData;
 };

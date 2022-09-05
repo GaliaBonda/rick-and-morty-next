@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
-import { wrapper } from '../store/store';
-import { GlobalStyle } from '../styles/Global.styles';
+import { wrapper } from '../store/configureStore';
+import { GlobalStyle } from '../assets/Global.styles';
 import { FC } from 'react';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => (

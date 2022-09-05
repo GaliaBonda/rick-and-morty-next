@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import getAllData from '../../common/utils/getAllData';
-import StatisticTablePage from '../../components/StatisticTablePage';
-import { wrapper } from '../../store/store';
+import getAllData from '../../utils/helpers/getAllData';
+import StatisticTablePage from '../../components/StatisticTablePage/StatisticTablePage';
+import { wrapper } from '../../store/configureStore';
 
 interface Props {
   rows: { id: number; data: (string | number)[] }[];

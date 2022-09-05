@@ -1,10 +1,10 @@
 import { AnyAction } from '@reduxjs/toolkit';
 import { put, call, all, takeLatest, delay } from 'redux-saga/effects';
 import api from '../api/api';
-import ICharacterApi from '../common/interfaces/ICharacterApi';
-import IResponse from '../common/interfaces/IResponse';
-import { update, add } from '../features/characters/charactersSlice';
-import { getNextPage } from '../features/next-page/nextPageSlice';
+import { update, add } from './characters/characters.slice';
+import { getNextPage } from './nextPage/nextPage.slice';
+import ICharacterApi from '../types/ICharacterApi';
+import IResponse from '../types/IResponse';
 
 export const sagaActions = {
   UPDATE_CHARACTERS_SAGA: 'UPDATE_CHARACTERS_SAGA',

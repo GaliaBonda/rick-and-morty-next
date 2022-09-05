@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import Nav from '../../components/Nav';
-import CharacterView from '../../components/CharacterView';
-import ICharacterApi from '../../common/interfaces/ICharacterApi';
+import Nav from '../../components/Nav/Nav';
+import CharacterView from '../../components/CharacterView/CharacterView';
 import api from '../../api/api';
-import getAllData from '../../common/utils/getAllData';
-import { wrapper } from '../../store/store';
+import getAllData from '../../utils/helpers/getAllData';
+import { wrapper } from '../../store/configureStore';
+import ICharacterApi from '../../types/ICharacterApi';
 
 interface Props {
   character: ICharacterApi;

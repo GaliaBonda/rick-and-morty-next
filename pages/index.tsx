@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import ICharacterApi from '../common/interfaces/ICharacterApi';
-import { wrapper } from '../store/store';
+import { wrapper } from '../store/configureStore';
 import api from '../api/api';
-import IResponse from '../common/interfaces/IResponse';
-import { getNextPage } from '../features/next-page/nextPageSlice';
-import { update } from '../features/characters/charactersSlice';
-import MainPage from '../components/MainPage';
+import { getNextPage } from '../store/nextPage/nextPage.slice';
+import { update } from '../store/characters/characters.slice';
+import MainPage from '../components/MainPage/MainPage';
+import ICharacterApi from '../types/ICharacterApi';
+import IResponse from '../types/IResponse';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {

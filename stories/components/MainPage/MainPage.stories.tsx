@@ -11,7 +11,9 @@ export default {
   decorators: [
     (Story) => (
       <Provider store={testStore}>
-        <Story />
+        <div style={{ padding: '3em 5em' }}>
+          <Story />
+        </div>
       </Provider>
     ),
   ],

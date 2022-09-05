@@ -17,7 +17,7 @@ module.exports = {
     ${head}
     <style>
     body {
-      padding: 3em 2em;
+      padding: 3em 5em;
       margin: 0;
       font-family: Aria;
       font-size: 1rem;

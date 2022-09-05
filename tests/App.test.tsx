@@ -11,7 +11,7 @@ import { renderWithProviders } from '../common/utils/renderWithProviders';
 import Main from '../pages';
 import Character from '../components/Character';
 import userEvent from '@testing-library/user-event';
-import singletonRouter, { NextRouter } from 'next/router';
+import singletonRouter from 'next/router';
 import mockRouter, { useRouter } from 'next-router-mock';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
 import CharacterPage from '../pages/characters/[character]';
@@ -29,34 +29,6 @@ test('Main page ui on first load', async () => {
     expect(characters.length).toEqual(20);
   });
 });
-
-export function createMockRouter(router?: Partial<NextRouter>): NextRouter {
-  return {
-    basePath: '',
-    pathname: '/',
-    route: '/',
-    query: {},
-    asPath: '/',
-    back: jest.fn(),
-    beforePopState: jest.fn(),
-    prefetch: jest.fn(),
-    push: jest.fn(),
-    reload: jest.fn(),
-    replace: jest.fn(),
-    events: {
-      on: jest.fn(),
-      off: jest.fn(),
-      emit: jest.fn(),
-    },
-    isFallback: false,
-    isLocaleDomain: false,
-    isReady: true,
-    defaultLocale: 'en',
-    domainLocales: [],
-    isPreview: false,
-    ...router,
-  };
-}
 
 test('go to character page callback on click', async () => {
   const goToCharacter = jest.fn();

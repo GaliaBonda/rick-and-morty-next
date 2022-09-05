@@ -20,7 +20,9 @@ export default {
         onRouteChangeStart={action('routeChangeStart')}
         onRouteChangeComplete={action('routeChangeComplete')}
       >
-        <Story />
+        <div style={{ padding: '3em 5em' }}>
+          <Story />
+        </div>
       </MemoryRouterProvider>
     ),
   ],

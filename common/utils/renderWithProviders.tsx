@@ -59,7 +59,7 @@ export function renderWithProviders(
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
     return <Provider store={store}>{children}</Provider>;
   }
-
+  sagaMiddleware.run(saga);
   store.dispatch({ type: sagaActions.UPDATE_CHARACTERS_SAGA });
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
 }

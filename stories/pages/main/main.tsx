@@ -5,7 +5,7 @@ import api from '../../../api/api';
 import IResponse from '../../../common/interfaces/IResponse';
 import { getNextPage } from '../../../features/next-page/nextPageSlice';
 import { update } from '../../../features/characters/charactersSlice';
-import MainPage from '../../../components/MainPage';
+import MainPage from '../../components/MainPage/MainPage';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {

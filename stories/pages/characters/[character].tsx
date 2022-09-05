@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import Nav from '../../../components/Nav';
-import CharacterView from '../../../components/CharacterView';
+import Nav from '../../components/Nav/Nav';
+import CharacterView from '../../components/CharacterView/CharacterView';
 import ICharacterApi from '../../../common/interfaces/ICharacterApi';
 import api from '../../../api/api';
 import getAllData from '../../../common/utils/getAllData';

@@ -3,7 +3,7 @@ import { cleanup, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import mockRouter from 'next-router-mock';
-import { renderWithProviders } from '../../utils/helpers/renderWithProviders';
+import { renderWithStoreWrapper } from '../../utils/helpers/renderWithStore';
 import StatisticTablePage from './StatisticTablePage';
 
 afterEach(cleanup);
@@ -15,7 +15,7 @@ beforeEach(() => {
 });
 
 test('sorting', async () => {
-  renderWithProviders(
+  renderWithStoreWrapper(
     <StatisticTablePage
       rows={[
         {
@@ -44,7 +44,7 @@ test('sorting', async () => {
   });
   tableCells = screen.getAllByTestId('test-table-cell');
   userEvent.click(sorter[1]);
-  await waitFor(() => {
+  waitFor(() => {
     expect(screen.getAllByTestId('test-table-cell')[1].textContent).not.toEqual(
       tableCells[1].textContent
     );

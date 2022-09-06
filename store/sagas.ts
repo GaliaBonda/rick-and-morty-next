@@ -1,10 +1,8 @@
 import { AnyAction } from '@reduxjs/toolkit';
 import { put, call, all, takeLatest, delay } from 'redux-saga/effects';
-import api from '../api/api';
-import { update, add } from './characters/characters.slice';
+import { update } from './characters/characters.slice';
 import { getNextPage } from './nextPage/nextPage.slice';
-import ICharacterApi from '../types/ICharacterApi';
-import IResponse from '../types/IResponse';
+import { Characters } from '../api/characters/Characters';
 
 export const sagaActions = {
   UPDATE_CHARACTERS_SAGA: 'UPDATE_CHARACTERS_SAGA',
@@ -15,16 +13,12 @@ export const sagaActions = {
 };
 
 export function* updateCharacters() {
-  try {
-    const data: IResponse<ICharacterApi> = yield call(() =>
-      api.get('/character')
-    );
-    yield put(getNextPage(data.info.next));
-
-    yield put(update(data.results));
-  } catch (error) {
-    console.log(error);
-  }
+  const charactersApi = new Characters();
+  const { characters, nextPage } = yield call(() =>
+    charactersApi.getCharacters()
+  );
+  yield put(getNextPage(nextPage));
+  yield put(update(characters));
 }
 
 function* watchUpdateCharacters() {
@@ -33,15 +27,12 @@ function* watchUpdateCharacters() {
 
 function* addCharacters(action: AnyAction) {
   yield delay(2000);
-  try {
-    const data: IResponse<ICharacterApi> = yield call(() =>
-      api.get(action.payload)
-    );
-    yield put(getNextPage(data.info.next));
-    yield put(add(data.results));
-  } catch (error) {
-    console.log(error);
-  }
+  const charactersApi = new Characters();
+  const { characters, nextPage } = yield call(() =>
+    charactersApi.getCharacters(action.payload)
+  );
+  yield put(getNextPage(nextPage));
+  yield put(update(characters));
 }
 
 function* watchAddCharacters() {

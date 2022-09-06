@@ -47,14 +47,9 @@ export const testStore = configureStore({
   preloadedState: {},
   middleware,
 });
-sagaMiddleware.run(saga);
-export function renderWithProviders(
+export async function renderWithStoreWrapper(
   ui: React.ReactElement,
-  {
-    preloadedState = {},
-    store = testStore,
-    ...renderOptions
-  }: ExtendedRenderOptions = {}
+  { store = testStore, ...renderOptions }: ExtendedRenderOptions = {}
 ) {
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
     return <Provider store={store}>{children}</Provider>;
@@ -62,4 +57,12 @@ export function renderWithProviders(
   sagaMiddleware.run(saga);
   store.dispatch({ type: sagaActions.UPDATE_CHARACTERS_SAGA });
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
+}
+export function renderWithProvider(
+  ui: React.ReactElement,
+  { store = testStore } = {}
+) {
+  sagaMiddleware.run(saga);
+  store.dispatch({ type: sagaActions.UPDATE_CHARACTERS_SAGA });
+  return <Provider store={store}>{ui}</Provider>;
 }

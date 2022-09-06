@@ -9,17 +9,17 @@ import {
 import '@testing-library/jest-dom';
 import mockRouter, { useRouter } from 'next-router-mock';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
-import { renderWithProviders } from '../../utils/helpers/renderWithProviders';
+import { renderWithStoreWrapper } from '../../utils/helpers/renderWithStore';
 import MainPage from './MainPage';
 
 afterEach(cleanup);
 
 test('Main page ui on first load', async () => {
-  renderWithProviders(<MainPage />);
+  renderWithStoreWrapper(<MainPage />);
   const links = screen.getAllByTestId('test-link');
   expect(links.length).toBeGreaterThan(1);
   const characters = await screen.findAllByTestId('test-character');
-  await waitFor(() => {
+  waitFor(() => {
     expect(characters.length).toEqual(20);
   });
 });
@@ -34,7 +34,7 @@ test('router go to character', async () => {
   const { result } = renderHook(() => {
     return useRouter();
   });
-  renderWithProviders(
+  renderWithStoreWrapper(
     <RouterContext.Provider value={result.current}>
       <MainPage />
     </RouterContext.Provider>

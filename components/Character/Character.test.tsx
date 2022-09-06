@@ -4,19 +4,19 @@ import '@testing-library/jest-dom';
 import Character from './Character';
 import singletonRouter from 'next/router';
 import mockRouter from 'next-router-mock';
-import { renderWithProviders } from '../../utils/helpers/renderWithProviders';
+import { renderWithStoreWrapper } from '../../utils/helpers/renderWithStore';
 
 afterEach(cleanup);
 
 test('go to character page callback on click', async () => {
   const goToCharacter = jest.fn();
-  renderWithProviders(
+  renderWithStoreWrapper(
     <Character key={0} name='' id={0} image='' clickHandler={goToCharacter} />
   );
   const character = await screen.findByTestId('test-character');
   fireEvent.click(character);
 
-  await waitFor(() => {
+  waitFor(() => {
     expect(goToCharacter).toHaveBeenCalled();
   });
 });
@@ -31,7 +31,7 @@ test('router mock with click on character', async () => {
   const goToCharacter = jest.fn(() => {
     singletonRouter.push('/characters/0');
   });
-  renderWithProviders(
+  renderWithStoreWrapper(
     <Character key={0} name='' id={0} image='' clickHandler={goToCharacter} />
   );
   const character = await screen.findByTestId('test-character');

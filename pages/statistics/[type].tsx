@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import getAllData from '../../utils/helpers/getAllData';
 import StatisticTablePage from '../../components/StatisticTablePage/StatisticTablePage';
 import { wrapper } from '../../store/configureStore';
+import { Characters } from '../../api/characters/Characters';
+import { Locations } from '../../api/locations/Locations';
 
 interface Props {
   rows: { id: number; data: (string | number)[] }[];
@@ -19,29 +20,34 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = wrapper.getStaticProps(() => async (context) => {
-  const path = context.params?.type === 'episodes' ? '/character' : '/location';
-  const allData = await getAllData(path);
-
+  let allData;
+  let property: 'episode' | 'residents';
+  let heading;
+  switch (context.params?.type) {
+    case 'episodes': {
+      property = 'episode';
+      heading = ['Character name', 'Number of episodes'];
+      const charactersApi = new Characters();
+      allData = await charactersApi.getAllCharacters();
+      break;
+    }
+    default: {
+      property = 'residents';
+      heading = ['Location', 'Number of characters'];
+      const locationsApi = new Locations();
+      allData = await locationsApi.getAllLocations();
+    }
+  }
   const rows = allData
     .map((item) => {
       return {
         id: item.id,
-        data: [
-          item.name,
-          context.params?.type === 'episodes'
-            ? item.episode?.length || 0
-            : item.residents?.length || 0,
-        ],
+        data: [item.name, item[property]?.length || 0],
       };
     })
     .sort((a, b) => {
       return a.data[1] <= b.data[1] ? 1 : -1;
     });
-
-  const heading =
-    context.params?.type === 'episodes'
-      ? ['Character name', 'Number of episodes']
-      : ['Location', 'Number of characters'];
 
   return { props: { rows, heading } };
 });

@@ -3,7 +3,7 @@ import { cleanup, fireEvent, renderHook, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import mockRouter, { useRouter } from 'next-router-mock';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
-import { renderWithProviders } from '../../utils/helpers/renderWithProviders';
+import { renderWithStoreWrapper } from '../../utils/helpers/renderWithStore';
 import LinkView from './LinkView';
 
 afterEach(cleanup);
@@ -14,11 +14,11 @@ beforeEach(() => {
   mockRouter.setCurrentUrl('/');
 });
 
-test('linkview hidden image', () => {
+test('linkview hidden image', async () => {
   const { result } = renderHook(() => {
     return useRouter();
   });
-  renderWithProviders(
+  renderWithStoreWrapper(
     <RouterContext.Provider value={result.current}>
       <LinkView
         link={{
@@ -41,7 +41,7 @@ test('linkview callback', async () => {
     return useRouter();
   });
   const clickHandler = jest.fn();
-  renderWithProviders(
+  renderWithStoreWrapper(
     <RouterContext.Provider value={result.current}>
       <LinkView
         link={{
@@ -64,7 +64,7 @@ test('linkview routing', async () => {
     return useRouter();
   });
   const clickHandler = jest.fn();
-  renderWithProviders(
+  renderWithStoreWrapper(
     <RouterContext.Provider value={result.current}>
       <LinkView
         link={{

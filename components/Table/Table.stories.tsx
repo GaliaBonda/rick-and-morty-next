@@ -10,13 +10,7 @@ export default {
   argTypes: {
     changeSort: { action: 'change sort', table: { disable: true } },
   },
-  decorators: [
-    (Story) => (
-      <div>
-        <Story />
-      </div>
-    ),
-  ],
+  decorators: [(Story) => <Story />],
 } as ComponentMeta<typeof Table>;
 const Template: ComponentStory<typeof Table> = (args) => <Table {...args} />;
 

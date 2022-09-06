@@ -1,7 +1,7 @@
-import api from '../../api/api';
-import ICharacterApi from '../../common/interfaces/ICharacterApi';
-import ILocation from '../../common/interfaces/ILocation';
-import IResponse from '../../common/interfaces/IResponse';
+import api from '../../api/request';
+import ICharacterApi from '../../types/ICharacterApi';
+import ILocation from '../../types/ILocation';
+import IResponse from '../../types/IResponse';
 
 const getAllData = async (path: string) => {
   let allData: (ILocation & ICharacterApi)[] = [];

@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
 import Nav from '../../components/Nav/Nav';
 import CharacterView from '../../components/CharacterView/CharacterView';
-import api from '../../api/api';
-import getAllData from '../../utils/helpers/getAllData';
 import { wrapper } from '../../store/configureStore';
 import ICharacterApi from '../../types/ICharacterApi';
+import { Characters } from '../../api/characters/Characters';
 
 interface Props {
   character: ICharacterApi;
 }
 
 export const getStaticPaths = async () => {
-  const allCharacters = await getAllData('/character');
+  const charactersApi = new Characters();
+  const allCharacters = await charactersApi.getAllCharacters();
   const paths = allCharacters.map((character) => ({
     params: { character: `${character.id}` },
   }));
@@ -19,7 +19,8 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = wrapper.getStaticProps(() => async (context) => {
-  const character = await api.get(`/character/${context.params?.character}`);
+  const charactersApi = new Characters();
+  const character = await charactersApi.getCharacter(context.params?.character);
   return { props: { character } };
 });
 

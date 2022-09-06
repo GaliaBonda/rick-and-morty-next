@@ -3,7 +3,7 @@ import { cleanup, fireEvent, renderHook, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import mockRouter, { useRouter } from 'next-router-mock';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
-import { renderWithProviders } from '../../utils/helpers/renderWithProviders';
+import { renderWithStoreWrapper } from '../../utils/helpers/renderWithStore';
 import StatisticsLayout from './StatisticsLayout';
 
 afterEach(cleanup);
@@ -18,7 +18,7 @@ test('statistics tabs', async () => {
   const { result } = renderHook(() => {
     return useRouter();
   });
-  renderWithProviders(
+  renderWithStoreWrapper(
     <RouterContext.Provider value={result.current}>
       <StatisticsLayout imagesHidden={false} />
     </RouterContext.Provider>

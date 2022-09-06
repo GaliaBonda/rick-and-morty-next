@@ -7,7 +7,14 @@ export default {
   component: TableRow,
   decorators: [
     (Story) => (
-      <div style={{ backgroundColor: 'white', width: 'fit-content' }}>
+      <div
+        style={{
+          backgroundColor: 'white',
+          width: 'fit-content',
+          fontSize: '1.5em',
+          borderRadius: '15px',
+        }}
+      >
         <table>
           <tbody>
             <Story />

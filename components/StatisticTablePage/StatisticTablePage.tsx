@@ -1,13 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
-import StatisticsLayout from '../StatisticsLayout/StatisticsLayout';
-import Table from '../Table/Table';
+import { StatisticsLayout } from '../StatisticsLayout/StatisticsLayout';
+import { Table } from '../Table/Table';
 
 interface Props {
   rows: { id: number; data: (string | number)[] }[];
   heading: string[];
 }
 
-const StatisticTablePage: FC<Props> = ({ rows, heading }) => {
+export const StatisticTablePage: FC<Props> = ({ rows, heading }) => {
   const [sortedRows, setSortedRows] = useState(rows);
 
   const changeSort = (desc: boolean, column: number) => {
@@ -34,5 +34,3 @@ const StatisticTablePage: FC<Props> = ({ rows, heading }) => {
     </StatisticsLayout>
   );
 };
-
-export default StatisticTablePage;

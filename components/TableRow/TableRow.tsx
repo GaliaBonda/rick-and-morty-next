@@ -6,7 +6,7 @@ interface Props {
   row: ITableData;
 }
 
-const TableRow: FC<Props> = ({ row }) => {
+export const TableRow: FC<Props> = ({ row }) => {
   return (
     <StyledTableRow>
       {row.data.map((item, index) => {
@@ -19,5 +19,3 @@ const TableRow: FC<Props> = ({ row }) => {
     </StyledTableRow>
   );
 };
-
-export default TableRow;

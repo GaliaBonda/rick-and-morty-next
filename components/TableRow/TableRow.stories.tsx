@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import TableRow from './TableRow';
+import { TableRow } from './TableRow';
 
 export default {
   title: 'TableRow',

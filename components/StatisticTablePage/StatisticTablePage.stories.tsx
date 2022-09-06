@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import StatisticTablePage from './StatisticTablePage';
+import { StatisticTablePage } from './StatisticTablePage';
 import { MemoryRouterProvider } from 'next-router-mock/dist/MemoryRouterProvider';
 import { action } from '@storybook/addon-actions';
 

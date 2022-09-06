@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
-import LinkView from '../LinkView/LinkView';
-import Nav from '../Nav/Nav';
+import { LinkView } from '../LinkView/LinkView';
+import { Nav } from '../Nav/Nav';
 import { StyledDiv } from './StatisticsLayout.styles';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   imagesHidden: boolean;
 }
 
-const StatisticsLayout: FC<Props> = ({ children, imagesHidden }) => {
+export const StatisticsLayout: FC<Props> = ({ children, imagesHidden }) => {
   const links = [{ link: '/', title: 'Main' }];
   const router = useRouter();
   const query = router.query.type;
@@ -55,5 +55,3 @@ const StatisticsLayout: FC<Props> = ({ children, imagesHidden }) => {
     </>
   );
 };
-
-export default StatisticsLayout;

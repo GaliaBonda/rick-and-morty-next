@@ -6,9 +6,9 @@ import {
   StyledImg,
 } from './CharacterView.styles';
 import ICharacterApi from '../../types/ICharacterApi';
-import CharacterInfo from '../CharacterInfo/CharacterInfo';
+import { CharacterInfo } from '../CharacterInfo/CharacterInfo';
 
-const CharacterView: FC<ICharacterApi> = ({
+export const CharacterView: FC<ICharacterApi> = ({
   name,
   image,
   gender,
@@ -25,5 +25,3 @@ const CharacterView: FC<ICharacterApi> = ({
     </FlexDiv>
   );
 };
-
-export default CharacterView;

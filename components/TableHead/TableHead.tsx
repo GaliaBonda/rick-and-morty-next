@@ -11,7 +11,7 @@ interface Props {
   changeSort: (desc: boolean, column: number) => void;
 }
 
-const TableHead: FC<Props> = ({ header, changeSort }) => {
+export const TableHead: FC<Props> = ({ header, changeSort }) => {
   const [descSorted, setDescSorted] = useState(true);
   const [activeSort, setActiveSort] = useState(1);
   const handleClick = (index: number) => {
@@ -49,5 +49,3 @@ const TableHead: FC<Props> = ({ header, changeSort }) => {
     </StyledTableHead>
   );
 };
-
-export default TableHead;

@@ -43,7 +43,7 @@ const loadingCircleTransition: Transition = {
   repeatType: 'reverse',
 };
 
-const Loader: FC = () => {
+export const Loader: FC = () => {
   return (
     <div data-testid='loader'>
       <div className='fixed  w-full min-h-screen z-50 bg-black opacity-30' />
@@ -74,5 +74,3 @@ const Loader: FC = () => {
     </div>
   );
 };
-
-export default Loader;

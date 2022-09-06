@@ -1,7 +1,7 @@
 import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import TableRow from './TableRow';
+import { TableRow } from './TableRow';
 
 afterEach(cleanup);
 

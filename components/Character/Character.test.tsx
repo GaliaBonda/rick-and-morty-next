@@ -1,7 +1,7 @@
 import React from 'react';
 import { cleanup, fireEvent, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Character from './Character';
+import { Character } from './Character';
 import singletonRouter from 'next/router';
 import mockRouter from 'next-router-mock';
 import { renderWithStoreWrapper } from '../../utils/helpers/renderWithStore';

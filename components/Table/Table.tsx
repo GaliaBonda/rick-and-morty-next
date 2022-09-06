@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { StyledTable, StyledTableBody } from './Table.styles';
 import ITableData from '../../types/ITableData';
-import TableHead from '../TableHead/TableHead';
-import TableRow from '../TableRow/TableRow';
+import { TableHead } from '../TableHead/TableHead';
+import { TableRow } from '../TableRow/TableRow';
 
 interface Props {
   header: string[];
@@ -10,7 +10,7 @@ interface Props {
   changeSort: (desc: boolean, column: number) => void;
 }
 
-const Table: FC<Props> = ({ header, rows, changeSort }) => {
+export const Table: FC<Props> = ({ header, rows, changeSort }) => {
   return (
     <StyledTable>
       <TableHead header={header} changeSort={changeSort} />
@@ -22,5 +22,3 @@ const Table: FC<Props> = ({ header, rows, changeSort }) => {
     </StyledTable>
   );
 };
-
-export default Table;

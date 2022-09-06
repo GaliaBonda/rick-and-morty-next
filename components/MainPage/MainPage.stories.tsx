@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import MainPage from './MainPage';
+import { MainPage } from './MainPage';
 import { renderWithProvider } from '../../utils/helpers/renderWithStore';
 
 export default {

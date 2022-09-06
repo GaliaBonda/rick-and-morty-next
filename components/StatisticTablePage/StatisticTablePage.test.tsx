@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import mockRouter from 'next-router-mock';
 import { renderWithStoreWrapper } from '../../utils/helpers/renderWithStore';
-import StatisticTablePage from './StatisticTablePage';
+import { StatisticTablePage } from './StatisticTablePage';
 
 afterEach(cleanup);
 

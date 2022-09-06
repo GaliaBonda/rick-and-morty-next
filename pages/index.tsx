@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { wrapper } from '../store/configureStore';
 import { getNextPage } from '../store/nextPage/nextPage.slice';
 import { update } from '../store/characters/characters.slice';
-import MainPage from '../components/MainPage/MainPage';
+import { MainPage } from '../components/MainPage/MainPage';
 import { Characters } from '../api/characters/Characters';
 
 export const getServerSideProps = wrapper.getServerSideProps(

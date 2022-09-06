@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import CharacterInfo from './CharacterInfo';
+import { CharacterInfo } from './CharacterInfo';
 
 export default {
   title: 'CharacterInfo',

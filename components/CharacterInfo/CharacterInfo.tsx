@@ -11,7 +11,7 @@ interface Props {
   status: string;
 }
 
-const CharacterInfo: FC<Props> = ({ gender, species, status }) => {
+export const CharacterInfo: FC<Props> = ({ gender, species, status }) => {
   const about = [
     { title: 'Gender:', info: gender },
     { title: 'Species:', info: species },
@@ -30,5 +30,3 @@ const CharacterInfo: FC<Props> = ({ gender, species, status }) => {
     </StyledInfo>
   );
 };
-
-export default CharacterInfo;

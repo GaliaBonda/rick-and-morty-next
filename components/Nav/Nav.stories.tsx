@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Nav from './Nav';
+import { Nav } from './Nav';
 
 export default {
   title: 'Nav',

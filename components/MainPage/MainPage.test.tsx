@@ -10,7 +10,7 @@ import '@testing-library/jest-dom';
 import mockRouter, { useRouter } from 'next-router-mock';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
 import { renderWithStoreWrapper } from '../../utils/helpers/renderWithStore';
-import MainPage from './MainPage';
+import { MainPage } from './MainPage';
 
 afterEach(cleanup);
 

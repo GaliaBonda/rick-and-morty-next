@@ -12,11 +12,11 @@ import { RootState } from '../../store/configureStore';
 import isElementInViewport from '../../utils/helpers/isElementInViewport';
 import { useRouter } from 'next/router';
 import ICharacterApi from '../../types/ICharacterApi';
-import Character from '../Character/Character';
-import Loader from '../Loader/Loader';
-import Nav from '../Nav/Nav';
+import { Character } from '../Character/Character';
+import { Loader } from '../Loader/Loader';
+import { Nav } from '../Nav/Nav';
 
-const MainPage: FC = () => {
+export const MainPage: FC = () => {
   const links = [
     { link: 'statistics', title: 'Statistics' },
     { link: 'statistics/episodes', title: 'Episodes' },
@@ -84,5 +84,3 @@ const MainPage: FC = () => {
     </MainDiv>
   );
 };
-
-export default MainPage;

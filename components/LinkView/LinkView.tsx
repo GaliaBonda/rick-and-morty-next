@@ -11,7 +11,7 @@ interface Props {
   clickHandler: () => void;
 }
 
-const LinkView: FC<Props> = ({
+export const LinkView: FC<Props> = ({
   link,
   title,
   image,
@@ -32,5 +32,3 @@ const LinkView: FC<Props> = ({
     </Link>
   );
 };
-
-export default LinkView;

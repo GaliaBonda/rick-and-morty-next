@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import Nav from '../../components/Nav/Nav';
-import CharacterView from '../../components/CharacterView/CharacterView';
+import { Nav } from '../../components/Nav/Nav';
+import { CharacterView } from '../../components/CharacterView/CharacterView';
 import { wrapper } from '../../store/configureStore';
 import ICharacterApi from '../../types/ICharacterApi';
 import { Characters } from '../../api/characters/Characters';

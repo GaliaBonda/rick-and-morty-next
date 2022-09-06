@@ -1,7 +1,7 @@
 import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import CharacterInfo from './CharacterInfo';
+import { CharacterInfo } from './CharacterInfo';
 
 afterEach(cleanup);
 

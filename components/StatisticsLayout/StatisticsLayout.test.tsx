@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import mockRouter, { useRouter } from 'next-router-mock';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
 import { renderWithStoreWrapper } from '../../utils/helpers/renderWithStore';
-import StatisticsLayout from './StatisticsLayout';
+import { StatisticsLayout } from './StatisticsLayout';
 
 afterEach(cleanup);
 

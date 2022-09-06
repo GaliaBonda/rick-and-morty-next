@@ -7,7 +7,7 @@ interface Props {
   links: { link: string; title: string }[];
 }
 
-const Nav: FC<Props> = ({ links }) => {
+export const Nav: FC<Props> = ({ links }) => {
   const router = useRouter();
   return (
     <StyledNav>
@@ -42,5 +42,3 @@ const Nav: FC<Props> = ({ links }) => {
     </StyledNav>
   );
 };
-
-export default Nav;

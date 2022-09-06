@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import StatisticTablePage from '../../components/StatisticTablePage/StatisticTablePage';
+import { StatisticTablePage } from '../../components/StatisticTablePage/StatisticTablePage';
 import { wrapper } from '../../store/configureStore';
 import { Characters } from '../../api/characters/Characters';
 import { Locations } from '../../api/locations/Locations';

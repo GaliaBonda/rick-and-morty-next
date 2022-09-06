@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { StatisticTablePage } from '../../components/StatisticTablePage/StatisticTablePage';
 import { wrapper } from '../../store/configureStore';
-import { Characters } from '../../api/characters/Characters';
-import { Locations } from '../../api/locations/Locations';
+import requestCharacters from '../../api/characters/characters-request';
+import requestLocations from '../../api/locations/locations-request';
 
 interface Props {
   rows: { id: number; data: (string | number)[] }[];
@@ -27,15 +27,13 @@ export const getStaticProps = wrapper.getStaticProps(() => async (context) => {
     case 'episodes': {
       property = 'episode';
       heading = ['Character name', 'Number of episodes'];
-      const charactersApi = new Characters();
-      allData = await charactersApi.getAllCharacters();
+      allData = await requestCharacters.getAllCharacters();
       break;
     }
     default: {
       property = 'residents';
       heading = ['Location', 'Number of characters'];
-      const locationsApi = new Locations();
-      allData = await locationsApi.getAllLocations();
+      allData = await requestLocations.getAllLocations();
     }
   }
   const rows = allData

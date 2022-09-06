@@ -3,15 +3,14 @@ import { Nav } from '../../components/Nav/Nav';
 import { CharacterView } from '../../components/CharacterView/CharacterView';
 import { wrapper } from '../../store/configureStore';
 import ICharacterApi from '../../types/ICharacterApi';
-import { Characters } from '../../api/characters/Characters';
+import requestCharacters from '../../api/characters/characters-request';
 
 interface Props {
   character: ICharacterApi;
 }
 
 export const getStaticPaths = async () => {
-  const charactersApi = new Characters();
-  const allCharacters = await charactersApi.getAllCharacters();
+  const allCharacters = await requestCharacters.getAllCharacters();
   const paths = allCharacters.map((character) => ({
     params: { character: `${character.id}` },
   }));
@@ -19,8 +18,9 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = wrapper.getStaticProps(() => async (context) => {
-  const charactersApi = new Characters();
-  const character = await charactersApi.getCharacter(context.params?.character);
+  const character = await requestCharacters.getCharacter(
+    context.params?.character
+  );
   return { props: { character } };
 });
 

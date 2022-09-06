@@ -3,12 +3,11 @@ import { wrapper } from '../store/configureStore';
 import { getNextPage } from '../store/nextPage/nextPage.slice';
 import { update } from '../store/characters/characters.slice';
 import { MainPage } from '../components/MainPage/MainPage';
-import { Characters } from '../api/characters/Characters';
+import requestCharacters from '../api/characters/characters-request';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
-    const charactersApi = new Characters();
-    const { characters, nextPage } = await charactersApi.getCharacters();
+    const { characters, nextPage } = await requestCharacters.getCharacters();
     store.dispatch(update(characters));
     store.dispatch(getNextPage(nextPage));
     return { props: { characters, nextPage } };

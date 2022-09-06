@@ -3,8 +3,8 @@ import IResponse from '../../types/IResponse';
 import getAllData from '../../utils/helpers/getAllData';
 import api from '../request';
 
-export class Characters {
-  getCharacters = async (endpoint: string = '/character') => {
+class Characters {
+  public getCharacters = async (endpoint: string = '/character') => {
     let characters: ICharacterApi[] = [];
     let nextPage = '';
     try {
@@ -16,11 +16,14 @@ export class Characters {
     }
     return { characters, nextPage };
   };
-  getCharacter = async (id?: number | string | string[]) => {
+  public getCharacter = async (id?: number | string | string[]) => {
     const character = await api.get(`/character/${id}`);
     return character;
   };
-  getAllCharacters = async () => {
+  public getAllCharacters = async () => {
     return await getAllData('/character');
   };
 }
+
+const instance = new Characters();
+export default instance;

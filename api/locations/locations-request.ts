@@ -1,7 +1,10 @@
 import getAllData from '../../utils/helpers/getAllData';
 
-export class Locations {
+class Locations {
   getAllLocations = async () => {
     return await getAllData('/location');
   };
 }
+
+const instance = new Locations();
+export default instance;

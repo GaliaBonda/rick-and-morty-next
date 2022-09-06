@@ -2,7 +2,7 @@ import { AnyAction } from '@reduxjs/toolkit';
 import { put, call, all, takeLatest, delay } from 'redux-saga/effects';
 import { update } from './characters/characters.slice';
 import { getNextPage } from './nextPage/nextPage.slice';
-import { Characters } from '../api/characters/Characters';
+import requestCharacters from '../api/characters/characters-request';
 
 export const sagaActions = {
   UPDATE_CHARACTERS_SAGA: 'UPDATE_CHARACTERS_SAGA',
@@ -13,9 +13,8 @@ export const sagaActions = {
 };
 
 export function* updateCharacters() {
-  const charactersApi = new Characters();
   const { characters, nextPage } = yield call(() =>
-    charactersApi.getCharacters()
+    requestCharacters.getCharacters()
   );
   yield put(getNextPage(nextPage));
   yield put(update(characters));
@@ -27,9 +26,8 @@ function* watchUpdateCharacters() {
 
 function* addCharacters(action: AnyAction) {
   yield delay(2000);
-  const charactersApi = new Characters();
   const { characters, nextPage } = yield call(() =>
-    charactersApi.getCharacters(action.payload)
+    requestCharacters.getCharacters(action.payload)
   );
   yield put(getNextPage(nextPage));
   yield put(update(characters));

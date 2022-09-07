@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
-import { StyledInput } from './SearchInput.styles';
+import { StyledDiv, StyledInput, StyledLabel } from './SearchInput.styles';
 
 interface Props {
   name: string;
@@ -9,13 +9,17 @@ interface Props {
 export const SearchInput: FC<Props> = ({ name, id }) => {
   const [searchValue, setSearchValue] = useState('');
   return (
-    <StyledInput
-      id={id}
-      name={name}
-      value={searchValue}
-      onChange={(e: ChangeEvent<HTMLInputElement>) =>
-        setSearchValue(e.target.value)
-      }
-    />
+    <StyledDiv>
+      <StyledLabel htmlFor={name}>{name}</StyledLabel>
+
+      <StyledInput
+        id={id}
+        name={name}
+        value={searchValue}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setSearchValue(e.target.value)
+        }
+      />
+    </StyledDiv>
   );
 };

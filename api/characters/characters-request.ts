@@ -1,4 +1,3 @@
-import { AxiosError } from 'axios';
 import ICharacterApi from '../../types/ICharacterApi';
 import IResponse from '../../types/IResponse';
 import errorHandler from '../../utils/helpers/errorHandler';
@@ -32,10 +31,7 @@ class Characters {
   public getFilteredCharacters = async (filter: string) => {
     let filteredCharacters: ICharacterApi[] = [];
     try {
-      const data: IResponse<ICharacterApi> = await api.get(
-        '/character' + filter
-      );
-      filteredCharacters = data.results;
+      filteredCharacters = await getAllData('/character?' + filter);
     } catch (error: unknown) {
       errorHandler(error);
     }

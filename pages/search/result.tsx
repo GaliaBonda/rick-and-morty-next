@@ -4,36 +4,42 @@ import { wrapper } from '../../store/configureStore';
 import requestCharacters from '../../api/characters/characters-request';
 import ICharacterApi from '../../types/ICharacterApi';
 import { setSearchResult } from '../../store/searchResult/searchResult.slice';
+import { Nav } from '../../components/Nav/Nav';
+import { EmptyResult } from '../../components/EmptyResult/EmptyResult';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const testResult = new URLSearchParams(
       context.query as unknown as URLSearchParams
     ).toString();
-    // const testResult = context.query.toString();
-    // console.log(testResult);
 
-    const filteredCharacters = await requestCharacters.getFilteredCharacters(
-      '?' + testResult
+    const foundCharacters = await requestCharacters.getFilteredCharacters(
+      testResult
     );
-    if (filteredCharacters && filteredCharacters.length) {
-      store.dispatch(setSearchResult(filteredCharacters));
-      return { props: { result: filteredCharacters[0], empty: false } };
+    if (foundCharacters && foundCharacters.length) {
+      store.dispatch(setSearchResult(foundCharacters));
+      return { props: { result: foundCharacters, empty: false } };
     } else {
-      return { props: { result: { name: '', image: '', id: 0 }, empty: true } };
+      return { props: { result: [], empty: true } };
     }
   }
 );
 
-const ResultPage: FC<{ result: ICharacterApi } & { empty: boolean }> = ({
+const ResultPage: FC<{ result: ICharacterApi[] } & { empty: boolean }> = ({
   result,
   empty = false,
 }) => {
-  {
-    if (empty) return <div>Empty search</div>;
-  }
+  const links = [
+    { link: '/', title: 'Main' },
+    { link: '/statistics', title: 'Statistics' },
+    { link: '/statistics/episodes', title: 'Episodes' },
+    { link: '/statistics/locations', title: 'Locations' },
+  ];
   return (
-    <SearchResult name={result.name} image={result.image} id={result.id} />
+    <>
+      <Nav links={links} />
+      {empty ? <EmptyResult /> : <SearchResult characters={result} />}
+    </>
   );
 };
 

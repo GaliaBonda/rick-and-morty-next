@@ -12,7 +12,18 @@ const getAllData = async (path: string) => {
 
   try {
     for (let i = 2; i <= firstPart.info.pages; i++) {
-      promises.push(api.get(`${path}/?page=` + i));
+      if (path.includes('?')) {
+        promises.push(
+          api.get(
+            `${path.slice(0, path.indexOf('?'))}/?page=` +
+              i +
+              '&' +
+              path.slice(path.indexOf('?') + 1)
+          )
+        );
+      } else {
+        promises.push(api.get(`${path}/?page=` + i));
+      }
     }
     const data = await Promise.all(promises);
     data.forEach((item) => {

@@ -10,7 +10,10 @@ interface Props {
 }
 
 export const StatisticsLayout: FC<Props> = ({ children, imagesHidden }) => {
-  const links = [{ link: '/', title: 'Main' }];
+  const links = [
+    { link: '/', title: 'Main' },
+    { link: '/search', title: 'Search' },
+  ];
   const router = useRouter();
   const query = router.query.type;
 

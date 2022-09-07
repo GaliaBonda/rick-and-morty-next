@@ -4,7 +4,7 @@ export const StyledNav = styled.nav`
   display: flex;
   column-gap: 4em;
   justify-content: center;
-  margin-bottom: 4em;
+  margin-bottom: 5em;
   position: relative;
 `;
 export const StyledLink = styled.a`

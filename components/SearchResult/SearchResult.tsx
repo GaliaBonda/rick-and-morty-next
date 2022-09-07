@@ -1,18 +1,32 @@
 import React, { FC } from 'react';
-import ICharacter from '../../types/ICharacter';
-import { Character } from '../Character/Character';
-import { StyledDiv, StyledHeader } from './SearchResult.styles';
+import ICharacterApi from '../../types/ICharacterApi';
+import { CharacterView } from '../CharacterView/CharacterView';
+import { StyledDiv, StyledHeader, StyledList } from './SearchResult.styles';
 
-export const SearchResult: FC<ICharacter> = ({ name, image, id }) => {
+interface Props {
+  characters: ICharacterApi[];
+}
+
+export const SearchResult: FC<Props> = ({ characters }) => {
   return (
     <StyledDiv>
-      <StyledHeader>Search results</StyledHeader>
-      <Character
-        clickHandler={() => undefined}
-        image={image}
-        name={name}
-        id={id}
-      />
+      <StyledHeader>Search result</StyledHeader>
+      <StyledList>
+        {characters.map((item) => {
+          return (
+            <CharacterView
+              image={item.image}
+              name={item.name}
+              id={item.id}
+              key={item.id}
+              status={item.status}
+              species={item.species}
+              gender={item.gender}
+              big={true}
+            />
+          );
+        })}
+      </StyledList>
     </StyledDiv>
   );
 };

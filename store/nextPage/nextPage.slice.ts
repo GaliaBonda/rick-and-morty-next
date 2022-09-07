@@ -7,12 +7,12 @@ export const nextPageSlice = createSlice({
   name: 'next-page',
   initialState,
   reducers: {
-    getNextPage: (state, action: PayloadAction<string>) => {
+    setNextPage: (state, action: PayloadAction<string>) => {
       return action.payload;
     },
   },
 });
 
-export const { getNextPage } = nextPageSlice.actions;
+export const { setNextPage } = nextPageSlice.actions;
 
 export default nextPageSlice.reducer;

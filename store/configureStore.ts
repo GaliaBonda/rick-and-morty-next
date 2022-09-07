@@ -9,6 +9,7 @@ import { applyMiddleware } from 'redux';
 import createSagaMiddleware, { Task } from 'redux-saga';
 import charactersReducer from './characters/characters.slice';
 import nextPageReducer from './nextPage/nextPage.slice';
+import searchResultReducer from './searchResult/searchResult.slice';
 import saga from './sagas';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import { composeWithDevTools } from '@redux-devtools/extension';
@@ -16,10 +17,15 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 const combinedReducer = combineReducers({
   characters: charactersReducer,
   nextPage: nextPageReducer,
+  searchResult: searchResultReducer,
 });
 
 const reducer: Reducer = (state: RootState, action: AnyAction) => {
-  if (action.type === HYDRATE && !state.characters.length) {
+  if (
+    action.type === HYDRATE &&
+    !state.characters.length &&
+    !state.testResult
+  ) {
     const nextState = {
       ...state,
       ...action.payload,

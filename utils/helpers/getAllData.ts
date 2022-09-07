@@ -2,6 +2,7 @@ import api from '../../api/request';
 import ICharacterApi from '../../types/ICharacterApi';
 import ILocation from '../../types/ILocation';
 import IResponse from '../../types/IResponse';
+import errorHandler from './errorHandler';
 
 const getAllData = async (path: string) => {
   let allData: (ILocation & ICharacterApi)[] = [];
@@ -18,7 +19,7 @@ const getAllData = async (path: string) => {
       allData = [...allData, ...item.results];
     });
   } catch (error) {
-    console.log(error);
+    errorHandler(error);
   }
 
   // *** Alternate way of getting all data from API (locations, episodes)

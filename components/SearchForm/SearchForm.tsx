@@ -44,11 +44,27 @@ export const SearchForm: FC = () => {
     <>
       <StyledHeader>Find your favorite characters</StyledHeader>
       <StyledForm onSubmit={handleSubmit}>
-        <SearchInput name='name' id='name' />
-        <SearchInput name='status' id='status' />
-        <SearchInput name='species' id='species' />
-        <SearchInput name='type' id='type' />
-        <SearchInput name='gender' id='gender' />
+        <SearchInput name='name' id='name' title='The name of the character.' />
+        <SearchInput
+          name='status'
+          id='status'
+          title='The status of the character (Alive, Dead or unknown).'
+        />
+        <SearchInput
+          name='species'
+          id='species'
+          title='The species of the character. Ex.: Human, Dog, Mythological Creature, etc.'
+        />
+        <SearchInput
+          name='type'
+          id='type'
+          title='The type or subspecies of the character. Ex.: Bird-Person, Mytholog, Parasite, Cat-Person, etc.'
+        />
+        <SearchInput
+          name='gender'
+          id='gender'
+          title='The gender of the character (Female, Male, Genderless or unknown).'
+        />
         <StyledButton type='submit'>Search</StyledButton>
       </StyledForm>
     </>

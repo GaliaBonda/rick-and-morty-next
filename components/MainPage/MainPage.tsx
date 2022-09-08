@@ -21,6 +21,7 @@ export const MainPage: FC = () => {
     { link: 'statistics', title: 'Statistics' },
     { link: 'statistics/episodes', title: 'Episodes' },
     { link: 'statistics/locations', title: 'Locations' },
+    { link: 'search', title: 'Search' },
   ];
 
   const [bottomHit, setBottomHit] = useState(false);

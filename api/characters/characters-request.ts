@@ -1,5 +1,6 @@
 import ICharacterApi from '../../types/ICharacterApi';
 import IResponse from '../../types/IResponse';
+import errorHandler from '../../utils/helpers/errorHandler';
 import getAllData from '../../utils/helpers/getAllData';
 import api from '../request';
 
@@ -12,16 +13,29 @@ class Characters {
       characters = data.results;
       nextPage = data.info.next;
     } catch (error) {
-      console.log(error);
+      errorHandler(error);
     }
     return { characters, nextPage };
   };
   public getCharacter = async (id?: number | string | string[]) => {
-    const character = await api.get(`/character/${id}`);
-    return character;
+    try {
+      const character = await api.get(`/character/${id}`);
+      return character;
+    } catch (error) {
+      errorHandler(error);
+    }
   };
   public getAllCharacters = async () => {
     return await getAllData('/character');
+  };
+  public getFilteredCharacters = async (filter: string) => {
+    let filteredCharacters: ICharacterApi[] = [];
+    try {
+      filteredCharacters = await getAllData('/character?' + filter);
+    } catch (error: unknown) {
+      errorHandler(error);
+    }
+    return filteredCharacters;
   };
 }
 

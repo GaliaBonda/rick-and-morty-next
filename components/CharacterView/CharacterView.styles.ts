@@ -3,9 +3,7 @@ import styled from 'styled-components';
 export const FlexDiv = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 6em;
   width: 100%;
-  height: 100%;
 `;
 export const StyledDiv = styled.div`
   display: flex;
@@ -15,7 +13,7 @@ export const StyledDiv = styled.div`
   border-radius: 20px;
   justify-content: center;
   flex-wrap: wrap;
-  flex: 0 1 50%;
+  flex: ${(props: { big?: boolean }) => (props.big ? '0 1 100%' : '0 1 50%')};
 `;
 export const StyledHeading = styled.h1`
   flex: 1 0 100%;

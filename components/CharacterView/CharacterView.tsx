@@ -8,16 +8,17 @@ import {
 import ICharacterApi from '../../types/ICharacterApi';
 import { CharacterInfo } from '../CharacterInfo/CharacterInfo';
 
-export const CharacterView: FC<ICharacterApi> = ({
+export const CharacterView: FC<ICharacterApi & { big?: boolean }> = ({
   name,
   image,
   gender,
   species,
   status,
+  big,
 }) => {
   return (
     <FlexDiv>
-      <StyledDiv>
+      <StyledDiv big={big}>
         <StyledHeading>{name}</StyledHeading>
         <StyledImg src={image} alt='character image'></StyledImg>
         <CharacterInfo gender={gender} species={species} status={status} />

@@ -2,6 +2,7 @@ import api from '../../api/request';
 import ICharacterApi from '../../types/ICharacterApi';
 import ILocation from '../../types/ILocation';
 import IResponse from '../../types/IResponse';
+import errorHandler from './errorHandler';
 
 const getAllData = async (path: string) => {
   let allData: (ILocation & ICharacterApi)[] = [];
@@ -11,14 +12,25 @@ const getAllData = async (path: string) => {
 
   try {
     for (let i = 2; i <= firstPart.info.pages; i++) {
-      promises.push(api.get(`${path}/?page=` + i));
+      if (path.includes('?')) {
+        promises.push(
+          api.get(
+            `${path.slice(0, path.indexOf('?'))}/?page=` +
+              i +
+              '&' +
+              path.slice(path.indexOf('?') + 1)
+          )
+        );
+      } else {
+        promises.push(api.get(`${path}/?page=` + i));
+      }
     }
     const data = await Promise.all(promises);
     data.forEach((item) => {
       allData = [...allData, ...item.results];
     });
   } catch (error) {
-    console.log(error);
+    errorHandler(error);
   }
 
   // *** Alternate way of getting all data from API (locations, episodes)

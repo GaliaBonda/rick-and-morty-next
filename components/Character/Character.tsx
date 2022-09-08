@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import ICharacter from '../../types/ICharacter';
-import { StyledImg, StyledLi, StyledParagraph } from './Character.styles';
+import { StyledImg, StyledDiv, StyledParagraph } from './Character.styles';
 
 interface Props extends ICharacter {
   clickHandler: (id: number) => void;
@@ -8,9 +8,9 @@ interface Props extends ICharacter {
 
 export const Character: FC<Props> = ({ image, name, id, clickHandler }) => {
   return (
-    <StyledLi onClick={() => clickHandler(id)} data-testid='test-character'>
-      <StyledParagraph>{name}</StyledParagraph>
+    <StyledDiv onClick={() => clickHandler(id)} data-testid='test-character'>
+      {name && <StyledParagraph>{name}</StyledParagraph>}
       <StyledImg src={image} />
-    </StyledLi>
+    </StyledDiv>
   );
 };

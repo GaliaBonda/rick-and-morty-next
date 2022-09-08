@@ -8,6 +8,7 @@ const TestPage: FC = () => {
     { link: '/statistics', title: 'Statistics' },
     { link: '/statistics/episodes', title: 'Episodes' },
     { link: '/statistics/locations', title: 'Locations' },
+    { link: '/game', title: 'Game' },
   ];
   return (
     <>

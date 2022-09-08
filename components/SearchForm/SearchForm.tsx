@@ -1,6 +1,7 @@
 import React, { FC, FormEvent } from 'react';
 import { useRouter } from 'next/router';
-import { StyledForm, StyledButton, StyledHeader } from './SearchForm.styles';
+import { StyledForm, StyledButton } from './SearchForm.styles';
+import { StyledHeader } from '../../assets/Global.styles';
 import { SearchInput } from '../SearchInput/SearchInput';
 
 export const SearchForm: FC = () => {

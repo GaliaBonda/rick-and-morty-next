@@ -1,22 +1,21 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { FC } from 'react';
-import {
-  StyledDiv,
-  StyledHeading,
-  StyledLink,
-  StyledParagraph,
-} from './EmptyResult.styles';
+import { StyledHeader } from '../../assets/Global.styles';
+import { Starter } from '../Starter/Starter';
+import { StyledDiv, StyledParagraph } from './EmptyResult.styles';
 
 export const EmptyResult: FC = () => {
+  const router = useRouter();
+  const clickHandle = () => {
+    router.push('/search');
+  };
   return (
     <StyledDiv>
-      <StyledHeading>Nothing found</StyledHeading>
+      <StyledHeader>Nothing found</StyledHeader>
       <StyledParagraph>
         Current search gave no results. Try using less restrictive filter
       </StyledParagraph>
-      <Link href='/search'>
-        <StyledLink>New search</StyledLink>
-      </Link>
+      <Starter title='New search' clickHandler={clickHandle} />
     </StyledDiv>
   );
 };

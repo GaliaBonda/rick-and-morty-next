@@ -18,12 +18,20 @@ class Characters {
     return { characters, nextPage };
   };
   public getCharacter = async (id?: number | string | string[]) => {
+    let character: ICharacterApi = {
+      id: 0,
+      name: '',
+      status: '',
+      species: '',
+      gender: '',
+      image: '',
+    };
     try {
-      const character = await api.get(`/character/${id}`);
-      return character;
+      character = await api.get(`/character/${id}`);
     } catch (error) {
       errorHandler(error);
     }
+    return character;
   };
   public getAllCharacters = async () => {
     return await getAllData('/character');

@@ -13,6 +13,7 @@ export const StatisticsLayout: FC<Props> = ({ children, imagesHidden }) => {
   const links = [
     { link: '/', title: 'Main' },
     { link: '/search', title: 'Search' },
+    { link: '/game', title: 'Game' },
   ];
   const router = useRouter();
   const query = router.query.type;

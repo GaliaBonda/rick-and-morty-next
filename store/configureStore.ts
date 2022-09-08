@@ -9,6 +9,7 @@ import { applyMiddleware } from 'redux';
 import createSagaMiddleware, { Task } from 'redux-saga';
 import charactersReducer from './characters/characters.slice';
 import nextPageReducer from './nextPage/nextPage.slice';
+import gameReducer from './game/game.slice';
 import searchResultReducer from './searchResult/searchResult.slice';
 import saga from './sagas';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
@@ -18,6 +19,7 @@ const combinedReducer = combineReducers({
   characters: charactersReducer,
   nextPage: nextPageReducer,
   searchResult: searchResultReducer,
+  game: gameReducer,
 });
 
 const reducer: Reducer = (state: RootState, action: AnyAction) => {

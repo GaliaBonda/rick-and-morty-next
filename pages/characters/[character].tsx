@@ -33,6 +33,7 @@ const Character: FC<Props> = ({ character }) => {
     { link: '/statistics/episodes', title: 'Episodes' },
     { link: '/statistics/locations', title: 'Locations' },
     { link: '/search', title: 'Search' },
+    { link: '/game', title: 'Game' },
   ];
 
   return (

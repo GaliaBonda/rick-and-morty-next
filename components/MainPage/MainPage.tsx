@@ -1,11 +1,7 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import React from 'react';
-import {
-  MainDiv,
-  StyledDiv,
-  StyledHeading,
-  StyledList,
-} from './MainPage.styles';
+import { MainDiv, StyledDiv, StyledList } from './MainPage.styles';
+import { StyledHeader } from '../../assets/Global.styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { sagaActions } from '../../store/sagas';
 import { RootState } from '../../store/configureStore';
@@ -22,6 +18,7 @@ export const MainPage: FC = () => {
     { link: 'statistics/episodes', title: 'Episodes' },
     { link: 'statistics/locations', title: 'Locations' },
     { link: 'search', title: 'Search' },
+    { link: '/game', title: 'Game' },
   ];
 
   const [bottomHit, setBottomHit] = useState(false);
@@ -65,17 +62,18 @@ export const MainPage: FC = () => {
   return (
     <MainDiv>
       <Nav links={links} />
-      <StyledHeading>Rick and Morty characters</StyledHeading>
+      <StyledHeader>Rick and Morty characters</StyledHeader>
       <StyledList>
         {storeCharacters.map((item) => {
           return (
-            <Character
-              key={item.id}
-              name={item.name}
-              id={item.id}
-              image={item.image}
-              clickHandler={goToCharacter}
-            />
+            <li key={item.id}>
+              <Character
+                name={item.name}
+                id={item.id}
+                image={item.image}
+                clickHandler={goToCharacter}
+              />
+            </li>
           );
         })}
       </StyledList>

@@ -13,9 +13,7 @@ export const sagaActions = {
 };
 
 export function* updateCharacters() {
-  const { characters, nextPage } = yield call(() =>
-    requestCharacters.getCharacters()
-  );
+  const { characters, nextPage } = yield call(requestCharacters.getCharacters);
   yield put(setNextPage(nextPage));
   yield put(update(characters));
 }
@@ -26,8 +24,9 @@ function* watchUpdateCharacters() {
 
 function* addCharacters(action: AnyAction) {
   yield delay(2000);
-  const { characters, nextPage } = yield call(() =>
-    requestCharacters.getCharacters(action.payload)
+  const { characters, nextPage } = yield call(
+    requestCharacters.getCharacters,
+    action.payload
   );
   yield put(setNextPage(nextPage));
   yield put(update(characters));

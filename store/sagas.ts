@@ -3,6 +3,7 @@ import { put, call, all, takeLatest, delay } from 'redux-saga/effects';
 import { update } from './characters/characters.slice';
 import { setNextPage } from './nextPage/nextPage.slice';
 import requestCharacters from '../api/characters/characters-request';
+import { gameSaga } from './game/game.saga';
 
 export const sagaActions = {
   UPDATE_CHARACTERS_SAGA: 'UPDATE_CHARACTERS_SAGA',
@@ -37,5 +38,5 @@ function* watchAddCharacters() {
 }
 
 export default function* rootSaga() {
-  yield all([watchUpdateCharacters(), watchAddCharacters()]);
+  yield all([watchUpdateCharacters(), watchAddCharacters(), gameSaga()]);
 }

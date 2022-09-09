@@ -4,4 +4,5 @@ export default interface IQuiz {
   question: string;
   answer?: string;
   id: number;
+  result: string;
 }

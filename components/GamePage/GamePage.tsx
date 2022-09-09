@@ -1,9 +1,10 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledHeader } from '../../assets/Global.styles';
 import { RootState } from '../../store/configureStore';
 import { sagaGameActions } from '../../store/game/game.saga';
 import getRandomBetween from '../../utils/helpers/getRandomBetween';
+import { Modal } from '../Modal/Modal';
 import { Nav } from '../Nav/Nav';
 import { Quiz } from '../Quiz/Quiz';
 import { Starter } from '../Starter/Starter';
@@ -17,19 +18,36 @@ export const GamePage: FC = () => {
     { link: '/statistics/locations', title: 'Locations' },
     { link: '/search', title: 'Search' },
   ];
-  const [gameMode, setGameMode] = useState(false);
+  const gameMode = useSelector((state: RootState) => state.game.gameMode);
   const quiz = useSelector(
-    (state: RootState) => state.game[state.game.length - 1]
+    (state: RootState) => state.game.quizes[state.game.quizes.length - 1]
+  );
+  const congratsShown = useSelector(
+    (state: RootState) => state.game.congratsShown
   );
   const dispatch = useDispatch();
 
-  const toggleGameMode = () => {
-    setGameMode((prevState) => !prevState);
+  const changeGameMode = () => {
+    if (gameMode) {
+      dispatch({ type: sagaGameActions.STOP_GAME_SAGA });
+    } else {
+      dispatch({ type: sagaGameActions.START_GAME_SAGA });
+      if (quiz.result) {
+        getNextQuiz();
+      }
+    }
   };
 
-  const nextQuiz = () => {
+  const getNextQuiz = () => {
     const random = getRandomBetween(0, 826);
-    dispatch({ type: sagaGameActions.UPDATE_QUIZ_SAGA });
+    dispatch({ type: sagaGameActions.UPDATE_QUIZ_SAGA, payload: random });
+  };
+
+  const restartGame = (restart: boolean) => {
+    dispatch({ type: sagaGameActions.HIDE_CONGRATS_SAGA });
+    if (!restart) {
+      dispatch({ type: sagaGameActions.STOP_GAME_SAGA });
+    }
   };
   return (
     <>
@@ -39,7 +57,7 @@ export const GamePage: FC = () => {
 
         <Starter
           title={!gameMode ? 'Start' : 'Stop'}
-          clickHandler={toggleGameMode}
+          clickHandler={changeGameMode}
           start={!gameMode}
         />
         {gameMode && (
@@ -49,10 +67,19 @@ export const GamePage: FC = () => {
             image={quiz.image}
             id={quiz.id}
             answer={quiz.answer}
-            nextQuiz={nextQuiz}
+            nextQuiz={getNextQuiz}
+            result={quiz.result}
           />
         )}
       </StyledDiv>
+      {/* {congratsShown && <Modal />} */}
+      {congratsShown && (
+        <Modal
+          title='Congrats! You won! Wanna go on?'
+          acceptHandler={() => restartGame(true)}
+          refuseHandler={() => restartGame(false)}
+        />
+      )}
     </>
   );
 };

@@ -1,23 +1,58 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import IQuestion from '../../types/IQuiz';
 import IQuiz from '../../types/IQuiz';
 
-const initialState: IQuiz[] = [];
+// const initialState: IQuiz[] = [];
+interface State {
+  quizes: IQuiz[];
+  gameMode: boolean;
+  score: number;
+  congratsShown: boolean;
+}
+const initialState: State = {
+  quizes: [],
+  gameMode: false,
+  score: 0,
+  congratsShown: false,
+};
 
 export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    setQuestion: (state, action: PayloadAction<IQuestion>) => {
-      state.push(action.payload);
+    toggleGameMode: (state, action: PayloadAction<boolean>) => {
+      state.gameMode = action.payload;
     },
-    setAnswer: (state, action: PayloadAction<string>) => {
-      if (state.length) state[state.length - 1].answer = action.payload;
+    setQuestion: (state, action: PayloadAction<IQuiz>) => {
+      state.quizes.push(action.payload);
+    },
+    setResult: (state, action: PayloadAction<string>) => {
+      if (state.quizes.length)
+        state.quizes[state.quizes.length - 1].result = action.payload;
+    },
+    increaseScore: (state) => {
+      state.score++;
+    },
+    resetScore: (state) => {
+      state.score = 0;
+    },
+    showCongrats: (state) => {
+      state.congratsShown = true;
+    },
+    hideCongrats: (state) => {
+      state.congratsShown = false;
     },
   },
 });
 
-export const { setQuestion, setAnswer } = gameSlice.actions;
+export const {
+  setQuestion,
+  setResult,
+  toggleGameMode,
+  increaseScore,
+  resetScore,
+  showCongrats,
+  hideCongrats,
+} = gameSlice.actions;
 
 export default gameSlice.reducer;

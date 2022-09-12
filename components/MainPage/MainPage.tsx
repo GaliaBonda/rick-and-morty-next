@@ -3,7 +3,7 @@ import React from 'react';
 import { MainDiv, StyledDiv, StyledList } from './MainPage.styles';
 import { StyledHeader } from '../../assets/Global.styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { sagaActions } from '../../store/sagas';
+import { sagaCharactersActions } from '../../store/characters/characters.saga';
 import { RootState } from '../../store/configureStore';
 import isElementInViewport from '../../utils/helpers/isElementInViewport';
 import { useRouter } from 'next/router';
@@ -44,7 +44,7 @@ export const MainPage: FC = () => {
         window.removeEventListener('scroll', handleScroll);
         setBottomHit(false);
         dispatch({
-          type: sagaActions.ADD_CHARACTERS_SAGA,
+          type: sagaCharactersActions.ADD_CHARACTERS_SAGA,
           payload: storeNextPage,
         });
       }

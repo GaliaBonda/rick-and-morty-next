@@ -23,15 +23,16 @@ const combinedReducer = combineReducers({
 });
 
 const reducer: Reducer = (state: RootState, action: AnyAction) => {
-  if (
-    action.type === HYDRATE &&
-    !state.characters.length &&
-    !state.testResult
-  ) {
+  if (action.type === HYDRATE) {
     const nextState = {
       ...state,
       ...action.payload,
     };
+    if (state.characters.length > 20) {
+      nextState.characters = state.characters;
+      nextState.nextPage = state.nextPage;
+    }
+
     return nextState;
   } else {
     return combinedReducer(state, action);

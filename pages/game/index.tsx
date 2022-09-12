@@ -3,13 +3,8 @@ import { GamePage } from '../../components/GamePage/GamePage';
 import { wrapper } from '../../store/configureStore';
 import getRandomBetween from '../../utils/helpers/getRandomBetween';
 import charactersApi from '../../api/characters/characters-request';
-import IQuiz from '../../types/IQuiz';
 import ICharacterApi from '../../types/ICharacterApi';
 import { setQuestion } from '../../store/game/game.slice';
-
-interface Props {
-  quiz: IQuiz;
-}
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
@@ -22,6 +17,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       question: 'Name this character',
       id: random,
       answer: character.name,
+      result: '',
     };
     store.dispatch(setQuestion(quiz));
 
@@ -29,7 +25,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 
-const Game: FC<Props> = () => {
+const Game: FC = () => {
   return <GamePage />;
 };
 

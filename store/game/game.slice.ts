@@ -24,7 +24,8 @@ export const gameSlice = createSlice({
       state.gameMode = action.payload;
     },
     setQuestion: (state, action: PayloadAction<IQuiz>) => {
-      state.quizes.push(action.payload);
+      state.quizes = [...state.quizes, action.payload];
+      // state.quizes.push(action.payload);
     },
     setResult: (state, action: PayloadAction<string>) => {
       if (state.quizes.length)

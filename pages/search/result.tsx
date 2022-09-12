@@ -34,6 +34,8 @@ const ResultPage: FC<{ result: ICharacterApi[] } & { empty: boolean }> = ({
     { link: '/statistics', title: 'Statistics' },
     { link: '/statistics/episodes', title: 'Episodes' },
     { link: '/statistics/locations', title: 'Locations' },
+    { link: '/search', title: 'Search' },
+    { link: '/game', title: 'Game' },
   ];
   return (
     <>

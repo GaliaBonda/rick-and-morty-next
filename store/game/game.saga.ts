@@ -53,10 +53,15 @@ export function* updateQuiz() {
 
 export function* changeGameMode() {
   while (true) {
-    yield take(sagaGameActions.START_GAME_SAGA);
-    yield put(toggleGameMode(true));
-    yield take(sagaGameActions.STOP_GAME_SAGA);
-    yield put(toggleGameMode(false));
+    const action: AnyAction = yield take([
+      sagaGameActions.START_GAME_SAGA,
+      sagaGameActions.STOP_GAME_SAGA,
+    ]);
+    if (action.type === sagaGameActions.START_GAME_SAGA) {
+      yield put(toggleGameMode(true));
+    } else {
+      yield put(toggleGameMode(false));
+    }
   }
 }
 export function* setGameResult() {

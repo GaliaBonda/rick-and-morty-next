@@ -20,7 +20,6 @@ export const sagaGameActions = {
   SET_GAME_RESULT_SAGA: 'SET_GAME_RESULT_SAGA',
   INCREASE_SCORE_SAGA: 'INCREASE_SCORE_SAGA',
   HIDE_CONGRATS_SAGA: 'HIDE_CONGRATS_SAGA',
-  // TOGGLE_GAME_MODE_SAGA: 'TOGGLE_GAME_MODE_SAGA',
 };
 
 export function* getNewQuiz(action: AnyAction) {

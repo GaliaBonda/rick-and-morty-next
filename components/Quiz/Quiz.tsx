@@ -1,7 +1,6 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { sagaGameActions } from '../../store/game/game.saga';
-import { increaseScore } from '../../store/game/game.slice';
 import IQuiz from '../../types/IQuiz';
 import { Character } from '../Character/Character';
 import {
@@ -42,9 +41,7 @@ export const Quiz: FC<Props> = ({ question, image, id, answer, nextQuiz }) => {
       answer &&
       answer.toLowerCase().includes(inputValue.toLowerCase())
     ) {
-      // console.log('finally');
       dispatch({ type: sagaGameActions.INCREASE_SCORE_SAGA });
-      // dispatch(increaseScore);
     }
   };
   const getNextQuiz = () => {

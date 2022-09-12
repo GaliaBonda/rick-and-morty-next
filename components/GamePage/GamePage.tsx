@@ -7,6 +7,7 @@ import getRandomBetween from '../../utils/helpers/getRandomBetween';
 import { Modal } from '../Modal/Modal';
 import { Nav } from '../Nav/Nav';
 import { Quiz } from '../Quiz/Quiz';
+import { Score } from '../Score/Score';
 import { Starter } from '../Starter/Starter';
 import { StyledDiv } from './GamePage.styles';
 
@@ -25,6 +26,8 @@ export const GamePage: FC = () => {
   const congratsShown = useSelector(
     (state: RootState) => state.game.congratsShown
   );
+  const score = useSelector((state: RootState) => state.game.score);
+
   const dispatch = useDispatch();
 
   const changeGameMode = () => {
@@ -60,7 +63,7 @@ export const GamePage: FC = () => {
           clickHandler={changeGameMode}
           start={!gameMode}
         />
-        {gameMode && (
+        {gameMode ? (
           <Quiz
             type={quiz.type}
             question={quiz.question}
@@ -70,12 +73,13 @@ export const GamePage: FC = () => {
             nextQuiz={getNextQuiz}
             result={quiz.result}
           />
+        ) : (
+          <Score score={score} />
         )}
       </StyledDiv>
-      {/* {congratsShown && <Modal />} */}
       {congratsShown && (
         <Modal
-          title='Congrats! You won! Wanna go on?'
+          title={`Congrats! You won with the score ${score}! Wanna go on?`}
           acceptHandler={() => restartGame(true)}
           refuseHandler={() => restartGame(false)}
         />
